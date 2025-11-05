@@ -1,0 +1,8 @@
+<meta charset="utf-8" />
+<title>@title | SAMS - Samhitha of Ayurvedic Medical Specialities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="SAMS - Samhitha of Ayurvedic Medical Specialities" name="description" />
+<meta content="Web Mahal Web Service" name="author" />
+<!-- App favicon -->
+<link rel="shortcut icon" href="assets/images/favicon.ico">
+<?php /**PATH C:\xampp\htdocs\sams\resources\views\admin\layouts\title-meta.blade.php ENDPATH**/ ?>
