@@ -25,7 +25,7 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        $titles = Title::where('status', 'published')->orderBy('name')->get();
+        $titles = Title::where('status', 'published')->oldest()->get();
         return view('admin.medicines.create', compact('titles'));
     }
 
@@ -36,7 +36,8 @@ class MedicineController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'ayurveda_name' => 'required|string|max:255',
+            // 'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
         ]);
@@ -50,11 +51,11 @@ class MedicineController extends Controller
         // Handle pivot titles (only if heading provided)
         if ($request->has('titles')) {
             foreach ($request->titles as $titleId => $data) {
-                $heading = trim($data['heading'] ?? '');
+                // $heading = trim($data['heading'] ?? '');
                 $description = trim($data['description'] ?? '');
                 $image = $data['image'] ?? null;
 
-                if ($heading !== '') {
+                if ($description !== '') {
                     $imagePath = null;
 
                     if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
@@ -62,7 +63,7 @@ class MedicineController extends Controller
                     }
 
                     $medicine->titles()->attach($titleId, [
-                        'heading' => $heading,
+                        // 'heading' => $heading,
                         'description' => $description,
                         'image_path' => $imagePath,
                     ]);
@@ -79,7 +80,7 @@ class MedicineController extends Controller
      */
     public function edit(Medicine $medicine)
     {
-        $titles = Title::where('status', 'published')->orderBy('name')->get();;
+        $titles = Title::where('status', 'published')->oldest()->get();;
         $medicine->load('titles');
         return view('admin.medicines.edit', compact('medicine', 'titles'));
     }
@@ -91,7 +92,8 @@ class MedicineController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'ayurveda_name' => 'required|string|max:255',
+            // 'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
         ]);
@@ -112,17 +114,17 @@ class MedicineController extends Controller
 
         if ($request->has('titles')) {
             foreach ($request->titles as $titleId => $data) {
-                $heading = trim($data['heading'] ?? '');
+                // $heading = trim($data['heading'] ?? '');
                 $description = trim($data['description'] ?? '');
                 $imagePath = null;
 
-                if ($heading !== '') {
+                if ($description !== '') {
                     if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
                         $imagePath = $data['image']->store('medicines', 'public');
                     }
 
                     $medicine->titles()->attach($titleId, [
-                        'heading' => $heading,
+                        // 'heading' => $heading,
                         'description' => $description,
                         'image_path' => $imagePath,
                     ]);

@@ -34,23 +34,10 @@ use App\Http\Controllers\Admin\ChangePasswordController;
 
 use App\Http\Controllers\Admin\FeedbackController;
 
-use App\Http\Controllers\Front\CartController;
-use App\Http\Controllers\Front\MapController;
-use App\Http\Controllers\Front\QuantityOverrideController;
 use App\Http\Controllers\Front\LanguageController as FrontLanguageController;
-use App\Http\Controllers\Front\PaymentController as FrontPaymentController;
-
-use App\Http\Controllers\Kitchen\Auth\LoginController as KitchenLoginController;
-use App\Http\Controllers\Kitchen\HomeController as KitchenHomeController;
-use App\Http\Controllers\Kitchen\DailyMealController as KitchenDailyMealController;
-use App\Http\Controllers\Kitchen\CustomerOrderController as KitchenCustomerOrderController;
-use App\Http\Controllers\Kitchen\CustomerController as KitchenCustomerController;
-use App\Http\Controllers\Kitchen\FeedbackController as KitchenFeedbackController;
-use App\Http\Controllers\Kitchen\MealController as KitchenMealController;
-use App\Http\Controllers\Kitchen\AddonController as KitchenAddonController;
 
 use App\Http\Controllers\Admin\ContentItemController;
-use App\Http\Controllers\Admin\AjaxController;
+// use App\Http\Controllers\Admin\AjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,7 +76,6 @@ Route::group(['prefix'=>'sms', 'as'=>'sms.'], function() {
 Route::view('/access-denied', 'pages.unauthenticated')->name('unauthenticated.page');
 
 Route::post('/get-districts', [FrontHomeController::class, 'getDistrictList'])->name('get.districts');
-Route::get('/get-kitchens', [RegisterController::class, 'getNearbyKitchensTest']);
 
 // Route::middleware(['auth:guest'])->group(function () {
     Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('front.register');
@@ -113,88 +99,6 @@ Route::get('/get-kitchens', [RegisterController::class, 'getNearbyKitchensTest']
 // });
 
 Route::get('language/{locale}', [FrontLanguageController::class, 'switch'])->name('front.set.language');
-
-Route::middleware(['auth:customer', 'approved.customer'])->group(function () { //->prefix('meal')
-
-    Route::get('/registration-success', function () {
-        return view('pages.registration_success');
-    })->name('front.registration.success');
-
-    Route::post('customer/logout', [LoginController::class, 'logout'])->name('customer.logout');
-
-    Route::get('/purchase/{meal}', [FrontHomeController::class, 'showMealPurchasePage'])->name('meal.purchase');
-    Route::post('/purchase/{meal}', [FrontHomeController::class, 'purchaseMeal'])->name('meal.purchase.store');
-    Route::get('/meal/payment-success/{order}', [FrontHomeController::class, 'showMealPaymentSuccess'])->name('meal.payment.success');
-
-    Route::post('/addons/confirm', [FrontHomeController::class, 'showAddonPurchasePage'])->name('addons.purchase.confirm');
-    Route::post('/addons/store', [FrontHomeController::class, 'addonPurchase'])->name('addons.purchase.store');
-    Route::get('/addons/payment-success/{order}', [FrontHomeController::class, 'showAddonPaymentSuccess'])->name('addons.payment.success');
-
-    Route::get('/payment-failed', function () {
-        return view('pages.payment_failed');
-    })->name('meal.payment.failed');
-
-    Route::get('/my-wallet', [FrontHomeController::class, 'myWallet'])->name('my.wallet');
-    Route::post('/wallet/make-default', [FrontHomeController::class, 'makeDefault'])->name('front.wallet.make-default');
-    Route::get('/todays-meal', [FrontHomeController::class, 'dailyMeals'])->name('customer.daily_meals');
-    Route::get('/extra-meals', [FrontHomeController::class, 'extraMeals'])->name('customer.extra_meals');
-    Route::post('/todays-meal/{id}/cancel', [FrontHomeController::class, 'cancelDailyOrder'])->name('customer.daily_meals.cancel');
-    Route::get('/my-purchases', [FrontHomeController::class, 'myPurchases'])->name('customer.purchases');
-    Route::get('/pay-later/{id}', [FrontHomeController::class, 'payLater'])->name('customer.orders.pay');
-    Route::post('/customer/extra-meal', [FrontHomeController::class, 'requestExtraMeal'])->name('customer.request.extra-meal');
-    Route::get('my-leaves', [FrontHomeController::class, 'mealLeaves'])->name('customer.leave.index');
-    Route::post('my-leaves', [FrontHomeController::class, 'markLeaves'])->name('customer.mark.leaves');
-    Route::delete('/my-leaves/{id}', [FrontHomeController::class, 'destroyLeave'])->name('customer.meal-leaves.destroy');
-    Route::post('/addon-wallet/toggle-status', [FrontHomeController::class, 'toggleStatus'])->name('addonWallet.toggleStatus');
-
-    Route::get('quantity-overrides', [QuantityOverrideController::class, 'index'])->name('customer.quantity-overrides.index');
-    Route::post('quantity-overrides', [QuantityOverrideController::class, 'store'])->name('customer.quantity-overrides.store');
-    Route::delete('quantity-overrides/{id}', [QuantityOverrideController::class, 'destroy'])->name('customer.quantity-overrides.destroy');
-
-    Route::get('/feedbacks', [FrontHomeController::class, 'feedbacks'])->name('feedbacks');
-    Route::post('feedback', [FrontHomeController::class, 'storeFeedback'])->name('customer.feedback.store');
-
-    // Customer Cart
-    Route::prefix('cart')->name('cart.')->group(function () {
-        Route::get('/', [CartController::class, 'index'])->name('index');
-        Route::post('/add-meal', [CartController::class, 'addMeal'])->name('addMeal');
-        Route::post('/add-addon', [CartController::class, 'addAddon'])->name('addAddon');
-        Route::post('/remove-item', [CartController::class, 'removeItem'])->name('removeItem');
-        Route::post('/clear', [CartController::class, 'clear'])->name('clear');
-
-        Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('checkout');
-        Route::post('/cart/checkout', [CartController::class, 'store'])->name('checkout.store');
-    });
-});
-
-Route::middleware(['auth:customer', 'approved.customer'])->group(function () {
-    Route::post('/meal/payment/verify', [FrontPaymentController::class, 'verifyRazorpayPayment'])->name('meal.payment.verify');
-
-    Route::get('/profile', [FrontHomeController::class, 'profile'])->name('customer.profile');
-    Route::put('/profile-update', [FrontHomeController::class, 'updateProfile'])->name('customer.profile.update');
-
-    Route::get('/profile/change-password', [FrontHomeController::class, 'showChangePasswordForm'])->name('customer.profile.password.change');
-    Route::put('/profile/change-password', [FrontHomeController::class, 'updatePassword'])->name('customer.password.update');
-
-    Route::get('/buy/{slug}', [FrontHomeController::class, 'showMeals'])->name('front.meal');
-    Route::get('/buy-plans', [FrontHomeController::class, 'showMealPlans'])->name('front.meal.plan');
-    Route::get('/buy-single', [FrontHomeController::class, 'showSingleMeal'])->name('front.meal.single');
-    Route::get('/buy-addons', [FrontHomeController::class, 'showAddons'])->name('front.show.addons');
-});
-
-
-Route::get('/about-us', [FrontHomeController::class, 'about_us'])->name('about_us');
-Route::get('/payment-terms', [FrontHomeController::class, 'payment_terms'])->name('payment_terms');
-Route::get('/privacy-policy', [FrontHomeController::class, 'privacy_policy'])->name('privacy_policy');
-Route::get('/support', [FrontHomeController::class, 'support'])->name('support');
-Route::get('/mess/faq', [FrontHomeController::class, 'faq'])->name('faq');
-Route::get('/mess/how-to-use', [FrontHomeController::class, 'how_to_use'])->name('how_to_use');
-Route::get('/mess/how-to-use-pdf', [FrontHomeController::class, 'downloadHowToUse'])->name('how_to_use_pdf');
-Route::get('/mess/site-map', [FrontHomeController::class, 'site_map'])->name('site_map');
-Route::view('/offline', 'pages.offline')->name('offline');
-
-Route::get('/get-nearby-kitchens', [MapController::class, 'getNearbyKitchens'])->name('get.nearby.kitchens');
-
 
 
 // ADMIN ROUTES START

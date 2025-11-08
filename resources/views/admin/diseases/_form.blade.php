@@ -12,8 +12,15 @@
                placeholder="Enter disease name">
     </div>
 
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Ayurveda Name</label>
+        <input type="text" name="ayurveda_name" class="form-control"
+            value="{{ old('ayurveda_name', $disease->ayurveda_name ?? '') }}"
+            placeholder="Enter Ayurveda name">
+    </div>
+
     {{-- Status --}}
-    <div class="col-md-3">
+    <div class="col-md-6">
         <label class="form-label fw-semibold">Status</label>
         <select name="status" class="form-select">
             <option value="published" {{ old('status', $disease->status ?? '') === 'published' ? 'selected' : '' }}>Published</option>
@@ -22,7 +29,7 @@
     </div>
 
     {{-- Image --}}
-    <div class="col-md-3">
+    <div class="col-md-6">
         <label class="form-label fw-semibold">Main Image</label>
         <input type="file" name="image" id="mainImageInput" class="form-control">
         <div class="mt-2" id="mainPreviewContainer">

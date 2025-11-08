@@ -39,6 +39,7 @@ class ChapterController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'ayurveda_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
         ]);
@@ -62,13 +63,17 @@ class ChapterController extends Controller
 
     public function update(Request $request, Chapter $chapter)
     {
-        $request->validate(['name' => 'required|string|max:255']);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'ayurveda_name' => 'required|string|max:255'
+        ]);
 
         $chapter->update([
             'name' => $request->name,
+            'ayurveda_name' => $request->ayurveda_name,
             'slug' => Str::slug($request->name),
             'description' => $request->description,
-            'status' => 'nullable|string|in:published,draft',
+            'status' => $request->status,
         ]);
 
         return redirect()->route('admin.chapters.index')->with('success', 'Chapter updated successfully.');

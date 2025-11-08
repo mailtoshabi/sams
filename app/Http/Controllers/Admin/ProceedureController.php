@@ -29,6 +29,7 @@ class ProceedureController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'ayurveda_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
@@ -72,6 +73,7 @@ class ProceedureController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'ayurveda_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',

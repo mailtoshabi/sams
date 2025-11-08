@@ -11,9 +11,14 @@
                value="{{ old('name', $medicine->name ?? '') }}" required
                placeholder="Enter medicine name">
     </div>
-
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Ayurveda Name</label>
+        <input type="text" name="ayurveda_name" class="form-control"
+            value="{{ old('ayurveda_name', $medicine->ayurveda_name ?? '') }}"
+            placeholder="Enter Ayurveda name">
+    </div>
     {{-- Status --}}
-    <div class="col-md-3">
+    <div class="col-md-6">
         <label class="form-label fw-semibold">Status</label>
         <select name="status" class="form-select">
             <option value="published" {{ old('status', $medicine->status ?? '') === 'published' ? 'selected' : '' }}>Published</option>
@@ -22,7 +27,7 @@
     </div>
 
     {{-- Image --}}
-    <div class="col-md-3">
+    <div class="col-md-6">
         <label class="form-label fw-semibold">Main Image</label>
         <input type="file" name="image" id="mainImageInput" class="form-control">
         <div class="mt-2" id="mainPreviewContainer">
@@ -35,10 +40,10 @@
     </div>
 
     {{-- Description --}}
-    <div class="col-12">
+    {{-- <div class="col-12">
         <label class="form-label fw-semibold">Description</label>
         <textarea name="description" id="mainEditor" class="form-control" rows="5">{{ old('description', $medicine->description ?? '') }}</textarea>
-    </div>
+    </div> --}}
 
 </div>
 
@@ -61,17 +66,17 @@
             <div class="card-body">
                 <div class="row g-3 align-items-start">
                     {{-- Heading --}}
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <label class="form-label">Heading</label>
                         <input type="text"
                             name="titles[{{ $title->id }}][heading]"
                             class="form-control"
                             value="{{ old('titles.'.$title->id.'.heading', $pivot->heading ?? '') }}"
                             placeholder="Enter heading for {{ $title->name }}">
-                    </div>
+                    </div> --}}
 
                     {{-- Image --}}
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <label class="form-label">Image</label>
                         <input type="file" name="titles[{{ $title->id }}][image]" class="form-control image-input" data-preview="preview_{{ $title->id }}">
                         <div class="mt-2">
@@ -81,7 +86,7 @@
                                 <img id="preview_{{ $title->id }}" src="#" width="120" class="rounded border d-none">
                             @endif
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- Description --}}
                     <div class="col-12">

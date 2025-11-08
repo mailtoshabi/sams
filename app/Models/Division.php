@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Division extends Model
 {
-    protected $fillable = ['name', 'slug', 'description','user_id','status'];
+    protected $fillable = ['name', 'ayurveda_name', 'slug', 'description','user_id','status'];
 
     public function categories(){ return $this->belongsToMany(Category::class,'category_division')->withTimestamps(); }
     public function chapters(){ return $this->belongsToMany(Chapter::class,'division_chapter')->withTimestamps(); }

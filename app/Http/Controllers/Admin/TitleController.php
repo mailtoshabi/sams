@@ -23,7 +23,7 @@ class TitleController extends Controller
             $query->where('status', $request->status);
         }
 
-        $titles = $query->latest()->paginate(15)->appends($request->all());
+        $titles = $query->oldest()->paginate(15)->appends($request->all());
 
         return view('admin.titles.index', compact('titles'));
     }

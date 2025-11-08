@@ -38,6 +38,7 @@ class FormulationController extends Controller
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'ayurveda_name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
         ]);
@@ -61,13 +62,17 @@ class FormulationController extends Controller
 
     public function update(Request $request, Formulation $formulation)
     {
-        $request->validate(['name' => 'required|string|max:255']);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'ayurveda_name' => 'required|string|max:255'
+        ]);
 
         $formulation->update([
             'name' => $request->name,
+            'ayurveda_name' => $request->ayurveda_name,
             'slug' => Str::slug($request->name),
             'description' => $request->description,
-            'status' => 'nullable|string|in:published,draft',
+            'status' => $request->status,
         ]);
 
         return redirect()->route('admin.formulations.index')->with('success', 'Formulation updated successfully.');

@@ -1,13 +1,18 @@
 <?php $editMode = isset($formulation); ?>
 
 <div class="row g-3">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <label class="form-label fw-semibold">Name</label>
         <input type="text" name="name" class="form-control" required
                value="<?php echo e(old('name', $formulation->name ?? '')); ?>" placeholder="Formulations name">
     </div>
-
-    <div class="col-md-6">
+    <div class="col-md-4">
+        <label class="form-label fw-semibold">Ayurveda Name</label>
+        <input type="text" name="ayurveda_name" class="form-control"
+            value="<?php echo e(old('ayurveda_name', $formulation->ayurveda_name ?? '')); ?>"
+            placeholder="Enter Ayurveda name">
+    </div>
+    <div class="col-md-4">
         <label class="form-label fw-semibold">Status</label>
         <select name="status" class="form-select">
             <option value="published" <?php echo e(old('status', $formulation->status ?? '') == 'published' ? 'selected' : ''); ?>>Published</option>

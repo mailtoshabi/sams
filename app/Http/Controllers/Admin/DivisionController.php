@@ -39,8 +39,9 @@ class DivisionController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
+            'ayurveda_name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'status' => 'nullable|string|in:published,draft',
+            'status' => $request->status,
         ]);
         $validated['slug'] = Str::slug($validated['name']);
         $validated['user_id'] = auth()->id() ?? 1;
@@ -62,13 +63,17 @@ class DivisionController extends Controller
 
     public function update(Request $request, Division $division)
     {
-        $request->validate(['name' => 'required|string|max:255']);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'ayurveda_name' => 'required|string|max:255',
+        ]);
 
         $division->update([
             'name' => $request->name,
+            'ayurveda_name' => $request->ayurveda_name,
             'slug' => Str::slug($request->name),
             'description' => $request->description,
-            'status' => 'nullable|string|in:published,draft',
+            'status' => $request->status,
         ]);
 
         return redirect()->route('admin.divisions.index')->with('success', 'Division updated successfully.');

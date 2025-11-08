@@ -12,8 +12,15 @@
                placeholder="Enter disease name">
     </div>
 
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Ayurveda Name</label>
+        <input type="text" name="ayurveda_name" class="form-control"
+            value="<?php echo e(old('ayurveda_name', $disease->ayurveda_name ?? '')); ?>"
+            placeholder="Enter Ayurveda name">
+    </div>
+
     
-    <div class="col-md-3">
+    <div class="col-md-6">
         <label class="form-label fw-semibold">Status</label>
         <select name="status" class="form-select">
             <option value="published" <?php echo e(old('status', $disease->status ?? '') === 'published' ? 'selected' : ''); ?>>Published</option>
@@ -22,7 +29,7 @@
     </div>
 
     
-    <div class="col-md-3">
+    <div class="col-md-6">
         <label class="form-label fw-semibold">Main Image</label>
         <input type="file" name="image" id="mainImageInput" class="form-control">
         <div class="mt-2" id="mainPreviewContainer">
@@ -46,7 +53,7 @@
 
 
 <h5 class="mb-3">Titles & Detailed Information</h5>
-
+<?php if($titles->count() > 0): ?>
 <?php $__currentLoopData = $titles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $title): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <?php
         $pivot = $editMode
@@ -90,7 +97,9 @@
         </div>
     </div>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
+<?php else: ?>
+No Titles Found. <a href="<?php echo e(route('admin.titles.create')); ?>">Add a New Title</a>
+<?php endif; ?>
 <?php $__env->startPush('scripts'); ?>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
     <script>
