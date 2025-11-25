@@ -54,13 +54,13 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CategorySeeder::class,
-            // DivisionSeeder::class,
-            // ChapterSeeder::class,
-            // FormulationSeeder::class,
-            // TitleSeeder::class,
-            // MedicineSeeder::class,
-            // DiseaseSeeder::class,
-            // ProceedureSeeder::class,
+            DivisionSeeder::class,
+            ChapterSeeder::class,
+            FormulationSeeder::class,
+            TitleSeeder::class,
+            MedicineSeeder::class,
+            DiseaseSeeder::class,
+            ProceedureSeeder::class,
         ]);
 
     }

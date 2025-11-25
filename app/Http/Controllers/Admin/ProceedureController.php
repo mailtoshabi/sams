@@ -14,7 +14,7 @@ class ProceedureController extends Controller
     public function index()
     {
         return '';
-        $proceedures = Proceedure::with('titles')->latest()->paginate(20);
+        $proceedures = Proceedure::with('titles')->oldest()->paginate(20);
         return view('admin.proceedures.index', compact('proceedures'));
     }
 

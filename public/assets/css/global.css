@@ -3,6 +3,10 @@ body[data-topbar=dark] #page-topbar, body[data-topbar=dark] .navbar-brand-box {
     border-color: #1c84ee;
 }
 
+p {
+    margin-bottom: 5px;
+}
+
 .table_min_height {
     min-height: 280px;
 }

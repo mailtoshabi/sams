@@ -24,7 +24,7 @@ class FormulationController extends Controller
             $query->where('status', $request->status);
         }
 
-        $formulations = $query->latest()->paginate(15)->appends($request->all());
+        $formulations = $query->oldest()->paginate(15)->appends($request->all());
 
         return view('admin.formulations.index', compact('formulations'));
     }

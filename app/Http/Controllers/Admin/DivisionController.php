@@ -24,7 +24,7 @@ class DivisionController extends Controller
         $query->where('status', $request->status);
     }
 
-    $divisions = $query->latest()->paginate(15)->appends($request->all());
+    $divisions = $query->oldest()->paginate(15)->appends($request->all());
 
     return view('admin.divisions.index', compact('divisions'));
 }
