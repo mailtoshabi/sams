@@ -42,10 +42,7 @@
     </div>
 
     
-    <div class="col-12">
-        <label class="form-label fw-semibold">Description</label>
-        <textarea name="description" id="mainEditor" class="form-control" rows="5"><?php echo e(old('description', $disease->description ?? '')); ?></textarea>
-    </div>
+    
 
 </div>
 
@@ -68,26 +65,9 @@
         </div>
         <div class="card-body">
             <div class="row g-3 align-items-start">
-                <div class="col-md-6">
-                    <label class="form-label">Heading</label>
-                    <input type="text"
-                           name="titles[<?php echo e($title->id); ?>][heading]"
-                           class="form-control"
-                           value="<?php echo e(old('titles.'.$title->id.'.heading', $pivot->heading ?? '')); ?>"
-                           placeholder="Enter heading for <?php echo e($title->name); ?>">
-                </div>
+                
 
-                <div class="col-md-6">
-                    <label class="form-label">Image</label>
-                    <input type="file" name="titles[<?php echo e($title->id); ?>][image]" class="form-control image-input" data-preview="preview_<?php echo e($title->id); ?>">
-                    <div class="mt-2">
-                        <?php if(!empty($pivot?->image_path)): ?>
-                            <img id="preview_<?php echo e($title->id); ?>" src="<?php echo e(asset('storage/'.$pivot->image_path)); ?>" width="120" class="rounded border">
-                        <?php else: ?>
-                            <img id="preview_<?php echo e($title->id); ?>" src="#" width="120" class="rounded border d-none">
-                        <?php endif; ?>
-                    </div>
-                </div>
+                
 
                 <div class="col-12">
                     <label class="form-label">Description</label>

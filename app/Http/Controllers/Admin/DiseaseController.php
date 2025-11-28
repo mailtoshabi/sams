@@ -13,14 +13,12 @@ class DiseaseController extends Controller
 {
     public function index()
     {
-        return '';
         $diseases = Disease::with('titles')->oldest()->paginate(20);
         return view('admin.diseases.index', compact('diseases'));
     }
 
     public function create()
     {
-        return '';
         $titles = Title::where('status', 'published')->orderBy('name')->get();;
         return view('admin.diseases.create', compact('titles'));
     }
@@ -30,7 +28,7 @@ class DiseaseController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'ayurveda_name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            // 'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
         ]);
@@ -43,16 +41,17 @@ class DiseaseController extends Controller
         // Attach only titles with non-empty heading
         if ($request->has('titles')) {
             foreach ($request->titles as $titleId => $data) {
-                $heading = trim($data['heading'] ?? '');
+                // $heading = trim($data['heading'] ?? '');
                 $description = trim($data['description'] ?? '');
-                if ($heading !== '') {
+                $image = $data['image'] ?? null;
+                if ($description !== '') {
                     $imagePath = null;
                     if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
                         $imagePath = $data['image']->store('diseases', 'public');
                     }
 
                     $disease->titles()->attach($titleId, [
-                        'heading' => $heading,
+                        // 'heading' => $heading,
                         'description' => $description,
                         'image_path' => $imagePath,
                     ]);
@@ -76,7 +75,7 @@ class DiseaseController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'ayurveda_name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            // 'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
         ]);
@@ -97,16 +96,17 @@ class DiseaseController extends Controller
 
         if ($request->has('titles')) {
             foreach ($request->titles as $titleId => $data) {
-                $heading = trim($data['heading'] ?? '');
+                // $heading = trim($data['heading'] ?? '');
                 $description = trim($data['description'] ?? '');
-                if ($heading !== '') {
+                $imagePath = null;
+                if ($description !== '') {
                     $imagePath = null;
                     if (isset($data['image']) && $data['image'] instanceof \Illuminate\Http\UploadedFile) {
                         $imagePath = $data['image']->store('diseases', 'public');
                     }
 
                     $disease->titles()->attach($titleId, [
-                        'heading' => $heading,
+                        // 'heading' => $heading,
                         'description' => $description,
                         'image_path' => $imagePath,
                     ]);
