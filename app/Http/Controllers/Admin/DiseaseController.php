@@ -19,7 +19,7 @@ class DiseaseController extends Controller
 
     public function create()
     {
-        $titles = Title::where('status', 'published')->orderBy('name')->get();;
+        $titles = Title::where('status', 'published')->oldest()->get();;
         return view('admin.diseases.create', compact('titles'));
     }
 
@@ -65,7 +65,7 @@ class DiseaseController extends Controller
 
     public function edit(Disease $disease)
     {
-        $titles = Title::where('status', 'published')->orderBy('name')->get();;
+        $titles = Title::where('status', 'published')->oldest()->get();;
         $disease->load('titles');
         return view('admin.diseases.edit', compact('disease', 'titles'));
     }

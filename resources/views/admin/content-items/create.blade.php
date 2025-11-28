@@ -30,3 +30,69 @@
 </div>
 
 @endsection
+
+@section('script')
+<script src="{{ URL::asset('assets/libs/select2/select2.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/pages/ecommerce-select2.init.js') }}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Global select2 init for AJAX selects
+        document.querySelectorAll('.select2-ajax').forEach(function(el) {
+            const url = el.dataset.url;
+            const placeholder = el.dataset.placeholder || 'Search...';
+            const dependsSelector = el.dataset.depends || null;
+
+            $(el).select2({
+                theme: 'classic', // optional (or remove to use default)
+                placeholder: placeholder,
+                allowClear: true,
+                width: '100%',
+                minimumInputLength: 1,
+                ajax: {
+                    url: url,
+                    dataType: 'json',
+                    delay: 300,
+                    data: function(params) {
+                        const query = {
+                            q: params.term, // search term
+                            page: params.page || 1
+                        };
+                        // pass dependent select value if exists
+                        if (dependsSelector) {
+                            const dep = document.querySelector(dependsSelector);
+                            if (dep && dep.value) query.dependency = dep.value;
+                        }
+                        return query;
+                    },
+                    processResults: function(data, params) {
+                        params.page = params.page || 1;
+                        return {
+                            results: data.results,
+                            pagination: {
+                                more: data.pagination && data.pagination.more
+                            }
+                        };
+                    },
+                    cache: true
+                }
+            });
+
+            // If this select depends on another, reload when parent changes
+            if (dependsSelector) {
+                const parent = document.querySelector(dependsSelector);
+                if (parent) {
+                    parent.addEventListener('change', function () {
+                        // clear current selection
+                        $(el).val(null).trigger('change');
+
+                        // optionally preload first page results or leave empty
+                    });
+                }
+            }
+        });
+
+    });
+    </script>
+@endsection

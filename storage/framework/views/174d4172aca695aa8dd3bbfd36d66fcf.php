@@ -1,43 +1,38 @@
-@extends('admin.layouts.master')
-@section('title') {{ __('Edit Content') }} @endsection
-@section('css')
-<link href="{{ URL::asset('assets/libs/select2/select2.min.css') }}" rel="stylesheet">
-<link href="{{ URL::asset('assets/libs/dropzone/dropzone.min.css') }}" rel="stylesheet">
-@endsection
+<?php $__env->startSection('title'); ?> <?php echo e(__('Add Content')); ?> <?php $__env->stopSection(); ?>
+<?php $__env->startSection('css'); ?>
+<link href="<?php echo e(URL::asset('assets/libs/select2/select2.min.css')); ?>" rel="stylesheet">
+<link href="<?php echo e(URL::asset('assets/libs/dropzone/dropzone.min.css')); ?>" rel="stylesheet">
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 
-@component('admin.dir_components.breadcrumb')
-    @slot('li_1') Content Management @endslot
-    @slot('li_2') Contents @endslot
-    @slot('title') {{ 'Edit Content' }} @endslot
-@endcomponent
+<?php $__env->startComponent('admin.dir_components.breadcrumb'); ?>
+    <?php $__env->slot('li_1'); ?> Content Management <?php $__env->endSlot(); ?>
+    <?php $__env->slot('li_2'); ?> Contents <?php $__env->endSlot(); ?>
+    <?php $__env->slot('title'); ?> <?php echo e('Add Content'); ?> <?php $__env->endSlot(); ?>
+<?php echo $__env->renderComponent(); ?>
 
 <div class="container mt-4">
-    <h3 class="mb-4">{{ $default_category->name }}</h3>
+    <h3 class="mb-4"><?php echo e($default_category->name); ?></h3>
 
-    <form action="{{ route('admin.content-items.update', $contentItem->id) }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
-
-        @include('admin.content-items._form', [
-            'default_category' => $default_category,
-            'contentItem' => $contentItem
-        ])
+    <form action="<?php echo e(route('admin.content-items.store')); ?>" method="POST" enctype="multipart/form-data">
+        <?php echo csrf_field(); ?>
+        <?php echo $__env->make('admin.content-items._form', ['default_category'=>$default_category], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
         <div class="mt-3">
-            <button class="btn btn-success">
-                <i class="bi bi-save"></i> Update
+            <button class="btn btn-primary">
+                <i class="bi bi-save"></i> Save
             </button>
-            <a href="{{ route('admin.content-items.index') }}" class="btn btn-secondary">Cancel</a>
+            <a href="<?php echo e(route('admin.content-items.index')); ?>" class="btn btn-secondary">Cancel</a>
         </div>
     </form>
 </div>
 
-@endsection
-@section('script')
-<script src="{{ URL::asset('assets/libs/select2/select2.min.js') }}"></script>
-<script src="{{ URL::asset('assets/js/pages/ecommerce-select2.init.js') }}"></script>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('script'); ?>
+<script src="<?php echo e(URL::asset('assets/libs/select2/select2.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/pages/ecommerce-select2.init.js')); ?>"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -99,4 +94,6 @@
 
     });
     </script>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.master', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\sams\resources\views/admin/content-items/create.blade.php ENDPATH**/ ?>

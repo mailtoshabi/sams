@@ -37,7 +37,7 @@ use App\Http\Controllers\Admin\FeedbackController;
 use App\Http\Controllers\Front\LanguageController as FrontLanguageController;
 
 use App\Http\Controllers\Admin\ContentItemController;
-// use App\Http\Controllers\Admin\AjaxController;
+use App\Http\Controllers\Admin\AjaxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -147,6 +147,11 @@ Route::prefix('super/admin')->middleware(['auth:web'])->group(function () {
     Route::get('division-proceedures', [DivisionProceedureController::class, 'index'])->name('admin.division.proceedures.index');
     Route::post('division-proceedures/attach', [DivisionProceedureController::class, 'attach'])->name('admin.division.proceedures.attach');
     Route::delete('division-proceedures/{division}/{proceedure}', [DivisionProceedureController::class, 'detach'])->name('admin.division.proceedures.detach');
+
+    Route::get('/ajax/divisions', [AjaxController::class, 'divisions'])->name('admin.ajax.divisions');
+    Route::get('/ajax/chapters', [AjaxController::class, 'chapters'])->name('admin.ajax.chapters');
+    Route::get('/ajax/formulations', [AjaxController::class, 'formulations'])->name('admin.ajax.formulations');
+    Route::get('/ajax/medicines', [AjaxController::class, 'medicines'])->name('admin.ajax.medicines');
 });
 Route::prefix('super/admin')->name('admin.')->middleware(['auth:web'])->group(function () {
     Route::get('/dashboard', [AdminHomeController::class,'index'])->name('dashboard');

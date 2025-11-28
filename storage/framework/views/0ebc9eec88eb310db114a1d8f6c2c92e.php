@@ -9,8 +9,8 @@
     <div class="col-md-6">
         <label class="form-label fw-semibold">Status</label>
         <select name="status" class="form-select" required>
-            <option value="draft" <?php echo e(old('status', $title->status ?? '') == 'draft' ? 'selected' : ''); ?>>Draft</option>
             <option value="published" <?php echo e(old('status', $title->status ?? '') == 'published' ? 'selected' : ''); ?>>Published</option>
+            <option value="draft" <?php echo e(old('status', $title->status ?? '') == 'draft' ? 'selected' : ''); ?>>Draft</option>
         </select>
     </div>
 
