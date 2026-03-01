@@ -26,6 +26,20 @@
         </select>
     </div>
 
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Medicine Type</label>
+        <select name="medicine_type_id" class="form-select">
+            <option value="">Select Type</option>
+
+            @foreach ($medicine_types as $medicine_type)
+                <option value="{{ $medicine_type->id }}"
+                    @selected(old('medicine_type_id', $medicine->medicine_type_id ?? null) == $medicine_type->id)>
+                    {{ $medicine_type->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
     {{-- Image --}}
     <div class="col-md-6">
         <label class="form-label fw-semibold">Main Image</label>
@@ -51,6 +65,7 @@
 
 {{-- Title-based Dynamic Sections --}}
 <h5 class="mb-3">Titles & Detailed Information</h5>
+{{ $titles->count() }}
 @if($titles->count() > 0)
     @foreach($titles as $title)
         @php

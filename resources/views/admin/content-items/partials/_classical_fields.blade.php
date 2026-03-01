@@ -35,6 +35,24 @@
         </select>
     </div>
 
+    <!-- Medicine Type -->
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Medicine Types</label>
+        <select name="medicine_type_id" id="medicine_type_id" class="form-select select2-ajax"
+                data-url="{{ route('admin.ajax.medicine_types') }}"
+                data-depends="#division_id"
+                data-placeholder="Search Medicine Type...">
+            <option value="">Select Chapter</option>
+
+            @if(!empty($selected->medicine_type_id))
+                @php $chap = \App\Models\MedicineType::find($selected->medicine_type_id); @endphp
+                @if($chap)
+                    <option value="{{ $chap->id }}" selected>{{ $chap->name }}</option>
+                @endif
+            @endif
+        </select>
+    </div>
+
     <!-- Formulation -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Formulation</label>

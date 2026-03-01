@@ -3,60 +3,85 @@
     <!-- Division -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Division</label>
-        <select name="division_id" class="form-select">
+        <select name="division_id" id="division_id" class="form-select select2-ajax"
+                data-url="<?php echo e(route('admin.ajax.divisions')); ?>" data-placeholder="Search division...">
             <option value="">Select Division</option>
-            <?php $__currentLoopData = $divisions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $division): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <option value="<?php echo e($division->id); ?>"
-                    <?php echo e(old('division_id', $selected->division_id ?? '') == $division->id ? 'selected' : ''); ?>>
-                    <?php echo e($division->name); ?>
 
-                </option>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            
+            <?php if(!empty($selected->division_id)): ?>
+                <?php $div = \App\Models\Division::find($selected->division_id); ?>
+                <?php if($div): ?>
+                    <option value="<?php echo e($div->id); ?>" selected><?php echo e($div->name); ?></option>
+                <?php endif; ?>
+            <?php endif; ?>
         </select>
     </div>
 
     <!-- Chapter -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Chapter</label>
-        <select name="chapter_id" class="form-select">
+        <select name="chapter_id" id="chapter_id" class="form-select select2-ajax"
+                data-url="<?php echo e(route('admin.ajax.chapters')); ?>"
+                data-depends="#division_id"
+                data-placeholder="Search chapter...">
             <option value="">Select Chapter</option>
-            <?php $__currentLoopData = $chapters; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $chapter): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <option value="<?php echo e($chapter->id); ?>"
-                    <?php echo e(old('chapter_id', $selected->chapter_id ?? '') == $chapter->id ? 'selected' : ''); ?>>
-                    <?php echo e($chapter->name); ?>
 
-                </option>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php if(!empty($selected->chapter_id)): ?>
+                <?php $chap = \App\Models\Chapter::find($selected->chapter_id); ?>
+                <?php if($chap): ?>
+                    <option value="<?php echo e($chap->id); ?>" selected><?php echo e($chap->name); ?></option>
+                <?php endif; ?>
+            <?php endif; ?>
+        </select>
+    </div>
+
+    <!-- Medicine Type -->
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Medicine Types</label>
+        <select name="medicine_type_id" id="medicine_type_id" class="form-select select2-ajax"
+                data-url="<?php echo e(route('admin.ajax.medicine_types')); ?>"
+                data-depends="#division_id"
+                data-placeholder="Search Medicine Type...">
+            <option value="">Select Chapter</option>
+
+            <?php if(!empty($selected->medicine_type_id)): ?>
+                <?php $chap = \App\Models\MedicineType::find($selected->medicine_type_id); ?>
+                <?php if($chap): ?>
+                    <option value="<?php echo e($chap->id); ?>" selected><?php echo e($chap->name); ?></option>
+                <?php endif; ?>
+            <?php endif; ?>
         </select>
     </div>
 
     <!-- Formulation -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Formulation</label>
-        <select name="formulation_id" class="form-select">
+        <select name="formulation_id" id="formulation_id" class="form-select select2-ajax"
+                data-url="<?php echo e(route('admin.ajax.formulations')); ?>" data-placeholder="Search formulation...">
             <option value="">Select Formulation</option>
-            <?php $__currentLoopData = $formulations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $formulation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <option value="<?php echo e($formulation->id); ?>"
-                    <?php echo e(old('formulation_id', $selected->formulation_id ?? '') == $formulation->id ? 'selected' : ''); ?>>
-                    <?php echo e($formulation->name); ?>
 
-                </option>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php if(!empty($selected->formulation_id)): ?>
+                <?php $f = \App\Models\Formulation::find($selected->formulation_id); ?>
+                <?php if($f): ?>
+                    <option value="<?php echo e($f->id); ?>" selected><?php echo e($f->name); ?></option>
+                <?php endif; ?>
+            <?php endif; ?>
         </select>
     </div>
 
     <!-- Medicine -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Medicine</label>
-        <select name="medicine_id" class="form-select">
+        <select name="medicine_id" id="medicine_id" class="form-select select2-ajax"
+                data-url="<?php echo e(route('admin.ajax.medicines')); ?>" data-placeholder="Search medicine...">
             <option value="">Select Medicine</option>
-            <?php $__currentLoopData = $medicines; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $medicine): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <option value="<?php echo e($medicine->id); ?>"
-                    <?php echo e(old('medicine_id', $selected->medicine_id ?? '') == $medicine->id ? 'selected' : ''); ?>>
-                    <?php echo e($medicine->name); ?>
 
-                </option>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            <?php if(!empty($selected->medicine_id)): ?>
+                <?php $m = \App\Models\Medicine::find($selected->medicine_id); ?>
+                <?php if($m): ?>
+                    <option value="<?php echo e($m->id); ?>" selected><?php echo e($m->name); ?></option>
+                <?php endif; ?>
+            <?php endif; ?>
         </select>
     </div>
 

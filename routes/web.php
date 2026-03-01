@@ -20,7 +20,8 @@ use App\Http\Controllers\Admin\{
     TitleController,
     MedicineController, DiseaseController, ProceedureController,
     DivisionController, ChapterController, FormulationController,
-    DivisionChapterController, DivisionProceedureController
+    DivisionChapterController, DivisionProceedureController,
+    MedicineTypeController
 };
 
 use App\Http\Controllers\Admin\UserController;
@@ -120,6 +121,7 @@ Route::prefix('super/admin')->middleware(['auth:web'])->group(function () {
 
     Route::resource('divisions', DivisionController::class, ['as' => 'admin']);
     Route::resource('chapters', ChapterController::class, ['as' => 'admin']);
+    Route::resource('medicine_types', MedicineTypeController::class, ['as' => 'admin']);
     Route::resource('formulations', FormulationController::class, ['as' => 'admin']);
 
     // CREATE content under a specific category
@@ -150,8 +152,11 @@ Route::prefix('super/admin')->middleware(['auth:web'])->group(function () {
 
     Route::get('/ajax/divisions', [AjaxController::class, 'divisions'])->name('admin.ajax.divisions');
     Route::get('/ajax/chapters', [AjaxController::class, 'chapters'])->name('admin.ajax.chapters');
+    Route::get('/ajax/medicine_types', [AjaxController::class, 'medicine_types'])->name('admin.ajax.medicine_types');
     Route::get('/ajax/formulations', [AjaxController::class, 'formulations'])->name('admin.ajax.formulations');
     Route::get('/ajax/medicines', [AjaxController::class, 'medicines'])->name('admin.ajax.medicines');
+    Route::get('/ajax/diseases', [AjaxController::class, 'diseases'])->name('admin.ajax.diseases');
+    Route::get('/ajax/proceedures', [AjaxController::class, 'proceedures'])->name('admin.ajax.proceedures');
 });
 Route::prefix('super/admin')->name('admin.')->middleware(['auth:web'])->group(function () {
     Route::get('/dashboard', [AdminHomeController::class,'index'])->name('dashboard');

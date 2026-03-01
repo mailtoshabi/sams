@@ -12,6 +12,7 @@
             <?php echo $__env->renderWhen($selectedCategory === \App\Http\Utilities\Utility::CATEGORY_CLASSICAL_DISEASE, 'admin.content-items.partials._classical_fields', [
                 'divisions' => App\Models\Division::all(),
                 'chapters' => App\Models\Chapter::all(),
+                'medicine_types' => App\Models\MedicineType::all(),
                 'formulations' => App\Models\Formulation::all(),
                 'medicines' => App\Models\Medicine::all(),
                 'selected' => $contentItem,

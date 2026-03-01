@@ -12,6 +12,7 @@
             @includeWhen($selectedCategory === \App\Http\Utilities\Utility::CATEGORY_CLASSICAL_DISEASE, 'admin.content-items.partials._classical_fields', [
                 'divisions' => App\Models\Division::all(),
                 'chapters' => App\Models\Chapter::all(),
+                'medicine_types' => App\Models\MedicineType::all(),
                 'formulations' => App\Models\Formulation::all(),
                 'medicines' => App\Models\Medicine::all(),
                 'selected' => $contentItem,
@@ -23,8 +24,14 @@
                 'selected' => $contentItem,
             ])
 
-            @includeWhen($selectedCategory === \App\Http\Utilities\Utility::CATEGORY_PATENT_MEDICINE || $selectedCategory === \App\Http\Utilities\Utility::CATEGORY_MORDERN_DISEASE, 'admin.content-items.partials._disease_fields', [
+            @includeWhen($selectedCategory === \App\Http\Utilities\Utility::CATEGORY_MORDERN_DISEASE, 'admin.content-items.partials._disease_fields', [
                 'diseases' => App\Models\Disease::all(),
+                'selected' => $contentItem,
+            ])
+
+            @includeWhen($selectedCategory === \App\Http\Utilities\Utility::CATEGORY_PATENT_MEDICINE, 'admin.content-items.partials._disease_patent_fields', [
+                'diseases' => App\Models\Disease::all(),
+                'medicines' => App\Models\Medicine::all(),
                 'selected' => $contentItem,
             ])
 

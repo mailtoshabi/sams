@@ -69,7 +69,7 @@
                         <tr>
                             <th>#</th>
                             <th>Category</th>
-                            <th>Division / Chapter</th>
+                            <th>Division / Chapter / Medicine Type</th>
                             <th>Formulation</th>
                             <th>Linked Item</th>
                             <th>Status</th>
@@ -88,10 +88,13 @@
                                 
                                 <td>
                                     <?php if($item->division): ?>
-                                        <div><i class="bi bi-diagram-3"></i> <?php echo e($item->division->name); ?></div>
+                                        <div><i class="bi bi-diagram-3"></i> <?php echo e($item->division->name); ?></div>/
                                     <?php endif; ?>
                                     <?php if($item->chapter): ?>
-                                        <div><i class="bi bi-book"></i> <?php echo e($item->chapter->name); ?></div>
+                                        <div><i class="bi bi-book"></i> <?php echo e($item->chapter->name); ?></div>/
+                                    <?php endif; ?>
+                                    <?php if($item->medicine_type): ?>
+                                        <div><i class="bi bi-book"></i> <?php echo e($item->medicine_type->name); ?></div>/
                                     <?php endif; ?>
                                 </td>
 

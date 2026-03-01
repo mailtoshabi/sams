@@ -3,7 +3,8 @@
     <!-- Division -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Division</label>
-        <select name="division_id" class="form-select">
+        <select name="division_id" class="form-select select2-ajax"
+                data-url="{{ route('admin.ajax.divisions') }}" data-placeholder="Search division...">
             <option value="">Select Division</option>
             @foreach($divisions as $division)
                 <option value="{{ $division->id }}"
@@ -17,7 +18,8 @@
     <!-- Proceedure -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Procedure</label>
-        <select name="proceedure_id" class="form-select">
+        <select name="proceedure_id" class="form-select select2-ajax"
+                data-url="{{ route('admin.ajax.proceedures') }}" data-placeholder="Search proceedure...">
             <option value="">Select Procedure</option>
             @foreach($proceedures as $proceedure)
                 <option value="{{ $proceedure->id }}"

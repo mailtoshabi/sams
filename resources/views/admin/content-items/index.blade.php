@@ -71,7 +71,7 @@
                         <tr>
                             <th>#</th>
                             <th>Category</th>
-                            <th>Division / Chapter</th>
+                            <th>Division / Chapter / Medicine Type</th>
                             <th>Formulation</th>
                             <th>Linked Item</th>
                             <th>Status</th>
@@ -90,10 +90,13 @@
                                 {{-- Division / Chapter --}}
                                 <td>
                                     @if($item->division)
-                                        <div><i class="bi bi-diagram-3"></i> {{ $item->division->name }}</div>
+                                        <div><i class="bi bi-diagram-3"></i> {{ $item->division->name }}</div>/
                                     @endif
                                     @if($item->chapter)
-                                        <div><i class="bi bi-book"></i> {{ $item->chapter->name }}</div>
+                                        <div><i class="bi bi-book"></i> {{ $item->chapter->name }}</div>/
+                                    @endif
+                                    @if($item->medicine_type)
+                                        <div><i class="bi bi-book"></i> {{ $item->medicine_type->name }}</div>/
                                     @endif
                                 </td>
 
@@ -102,7 +105,10 @@
 
                                 {{-- Linked Item --}}
                                 <td>
-                                    @if($item->medicine)
+                                    @if($item->medicine && $item->disease)
+                                        <span class="badge bg-info text-dark">Medicine</span> {{ $item->medicine->name }}
+                                        <span class="badge bg-danger">Disease</span> {{ $item->disease->name }}
+                                    @elseif($item->medicine)
                                         <span class="badge bg-info text-dark">Medicine</span> {{ $item->medicine->name }}
                                     @elseif($item->disease)
                                         <span class="badge bg-danger">Disease</span> {{ $item->disease->name }}

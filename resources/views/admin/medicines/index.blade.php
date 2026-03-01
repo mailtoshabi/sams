@@ -20,6 +20,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th>Titles</th>
                     <th>Updated</th>
@@ -34,6 +35,7 @@
                             <strong>{{ $medicine->name }}</strong><br>
                             <small class="text-muted">{{ $medicine->slug }}</small>
                         </td>
+                        <td>{{ $medicine->medicineType?->name ?? 'No type assigned' }}</td>
                         <td>
                             <span class="badge bg-{{ $medicine->status === 'published' ? 'success' : 'secondary' }}">
                                 {{ ucfirst($medicine->status) }}

@@ -63,15 +63,15 @@ class ContentItemController extends Controller
     {
         $default_category = Category::findOrFail(decrypt($category_id));
 
-        if($default_category->id==1) {
+        // if($default_category->id==1) {
             return view('admin.content-items.create', [
                 'default_category' => $default_category,
                 'categories' => Category::all(),
                 'contentItem' => null,
             ]);
-        }else {
-            abort(404);
-        }
+        // }else {
+        //     abort(404);
+        // }
     }
 
     // 🟦 EDIT PAGE (within category)
@@ -94,6 +94,7 @@ class ContentItemController extends Controller
             'category_id' => 'required|exists:categories,id',
             'division_id' => 'nullable|exists:divisions,id',
             'chapter_id' => 'nullable|exists:chapters,id',
+            'medicine_type_id' => 'nullable|exists:medicine_types,id',
             'formulation_id' => 'nullable|exists:formulations,id',
             'medicine_id' => 'nullable|exists:medicines,id',
             'disease_id' => 'nullable|exists:diseases,id',
@@ -116,6 +117,7 @@ class ContentItemController extends Controller
             'category_id' => 'required|exists:categories,id',
             'division_id' => 'nullable|exists:divisions,id',
             'chapter_id' => 'nullable|exists:chapters,id',
+            'medicine_type_id' => 'nullable|exists:medicine_types,id',
             'formulation_id' => 'nullable|exists:formulations,id',
             'medicine_id' => 'nullable|exists:medicines,id',
             'disease_id' => 'nullable|exists:diseases,id',
@@ -155,6 +157,12 @@ class ContentItemController extends Controller
             break;
 
         case Utility::CATEGORY_PATENT_MEDICINE:
+            $html = view('admin.content-items.partials._disease_patent_fields', [
+                'diseases' => Disease::all(),
+                'medicines' => Medicine::all(),
+            ])->render();
+            break;
+
         case Utility::CATEGORY_MORDERN_DISEASE:
             $html = view('admin.content-items.partials._disease_fields', [
                 'diseases' => Disease::all(),

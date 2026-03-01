@@ -112,6 +112,15 @@
                     
                     <li class="menu-title text-uppercase mt-3">Medical Repository</li>
 
+                    <li class="<?php echo e(request()->routeIs('admin.medicine_types.*') ? 'mm-active' : ''); ?>">
+                        <a href="javascript:void(0);" class="has-arrow <?php echo e(request()->routeIs('admin.medicine_types.*') ? 'mm-active' : ''); ?>">
+                            <i class="fas fa-capsules"></i> <span>Medicine Type</span>
+                        </a>
+                        <ul class="sub-menu <?php echo e(request()->routeIs('admin.medicine_types.*') ? 'mm-show' : ''); ?>">
+                            <li><a href="<?php echo e(route('admin.medicine_types.index')); ?>" class="<?php echo e(request()->routeIs('admin.medicine_types.index') ? 'active' : ''); ?>"><i class="fas fa-list"></i> All Medicine Type</a></li>
+                            <li><a href="<?php echo e(route('admin.medicine_types.create')); ?>" class="<?php echo e(request()->routeIs('admin.medicine_types.create') ? 'active' : ''); ?>"><i class="fas fa-plus-circle"></i> Add Medicine Type</a></li>
+                        </ul>
+                    </li>
                     <li class="<?php echo e(request()->routeIs('admin.medicines.*') ? 'mm-active' : ''); ?>">
                         <a href="javascript:void(0);" class="has-arrow <?php echo e(request()->routeIs('admin.medicines.*') ? 'mm-active' : ''); ?>">
                             <i class="fas fa-pills"></i> <span>Medicines</span>
@@ -119,6 +128,7 @@
                         <ul class="sub-menu <?php echo e(request()->routeIs('admin.medicines.*') ? 'mm-show' : ''); ?>">
                             <li><a href="<?php echo e(route('admin.medicines.index')); ?>" class="<?php echo e(request()->routeIs('admin.medicines.index') ? 'active' : ''); ?>"><i class="fas fa-list"></i> All Medicines</a></li>
                             <li><a href="<?php echo e(route('admin.medicines.create')); ?>" class="<?php echo e(request()->routeIs('admin.medicines.create') ? 'active' : ''); ?>"><i class="fas fa-plus-circle"></i> Add Medicine</a></li>
+                        </a>
                         </ul>
                     </li>
 

@@ -3,7 +3,7 @@
     <!-- Formulation -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Formulation</label>
-        <select name="formulation_id" class="form-select">
+        <select name="formulation_id" class="form-select select2-ajax" data-url="<?php echo e(route('admin.ajax.formulations')); ?>" data-placeholder="Search formulation...">
             <option value="">Select Formulation</option>
             <?php $__currentLoopData = $formulations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $formulation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <option value="<?php echo e($formulation->id); ?>"
@@ -18,7 +18,8 @@
     <!-- Medicine -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Medicine</label>
-        <select name="medicine_id" class="form-select">
+        <select name="medicine_id" class="form-select select2-ajax"
+        data-url="<?php echo e(route('admin.ajax.medicines')); ?>" data-placeholder="Search medicine...">
             <option value="">Select Medicine</option>
             <?php $__currentLoopData = $medicines; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $medicine): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <option value="<?php echo e($medicine->id); ?>"

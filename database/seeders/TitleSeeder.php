@@ -23,6 +23,7 @@ class TitleSeeder extends Seeder
             ], [
                 'name' => $title,
                 'description' => "Default description for $title",
+                'status' => "published",
             ]);
         }
     }

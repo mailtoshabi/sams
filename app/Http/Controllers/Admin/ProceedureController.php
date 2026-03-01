@@ -13,15 +13,13 @@ class ProceedureController extends Controller
 {
     public function index()
     {
-        return '';
         $proceedures = Proceedure::with('titles')->oldest()->paginate(20);
         return view('admin.proceedures.index', compact('proceedures'));
     }
 
     public function create()
     {
-        return '';
-        $titles = Title::where('status', 'published')->orderBy('name')->get();;
+        $titles = Title::where('status', 'published')->oldest()->get();;
         return view('admin.proceedures.create', compact('titles'));
     }
 
@@ -64,7 +62,7 @@ class ProceedureController extends Controller
 
     public function edit(Proceedure $proceedure)
     {
-        $titles = Title::where('status', 'published')->orderBy('name')->get();;
+        $titles = Title::where('status', 'published')->oldest()->get();;
         $proceedure->load('titles');
         return view('admin.proceedures.edit', compact('proceedure', 'titles'));
     }

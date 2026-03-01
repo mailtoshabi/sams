@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Medicine;
+use App\Models\MedicineType;
 use App\Models\Title;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -25,8 +26,9 @@ class MedicineController extends Controller
      */
     public function create()
     {
+        $medicine_types = MedicineType::where('status', 'published')->oldest()->get();
         $titles = Title::where('status', 'published')->oldest()->get();
-        return view('admin.medicines.create', compact('titles'));
+        return view('admin.medicines.create', compact('titles','medicine_types'));
     }
 
     /**
@@ -37,6 +39,7 @@ class MedicineController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'ayurveda_name' => 'required|string|max:255',
+            'medicine_type_id' => 'required',
             // 'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
@@ -80,9 +83,10 @@ class MedicineController extends Controller
      */
     public function edit(Medicine $medicine)
     {
-        $titles = Title::where('status', 'published')->oldest()->get();;
+        $titles = Title::where('status', 'published')->oldest()->get();
+        $medicine_types = MedicineType::where('status', 'published')->oldest()->get();
         $medicine->load('titles');
-        return view('admin.medicines.edit', compact('medicine', 'titles'));
+        return view('admin.medicines.edit', compact('medicine', 'titles','medicine_types'));
     }
 
     /**
@@ -93,6 +97,7 @@ class MedicineController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'ayurveda_name' => 'required|string|max:255',
+            'medicine_type_id' => 'required',
             // 'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',

@@ -3,7 +3,8 @@
     <!-- Division -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Division</label>
-        <select name="division_id" class="form-select">
+        <select name="division_id" class="form-select select2-ajax"
+                data-url="<?php echo e(route('admin.ajax.divisions')); ?>" data-placeholder="Search division...">
             <option value="">Select Division</option>
             <?php $__currentLoopData = $divisions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $division): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <option value="<?php echo e($division->id); ?>"
@@ -18,7 +19,8 @@
     <!-- Proceedure -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Procedure</label>
-        <select name="proceedure_id" class="form-select">
+        <select name="proceedure_id" class="form-select select2-ajax"
+                data-url="<?php echo e(route('admin.ajax.proceedures')); ?>" data-placeholder="Search proceedure...">
             <option value="">Select Procedure</option>
             <?php $__currentLoopData = $proceedures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $proceedure): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <option value="<?php echo e($proceedure->id); ?>"

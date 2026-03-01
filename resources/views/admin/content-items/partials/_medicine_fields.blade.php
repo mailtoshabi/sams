@@ -3,7 +3,7 @@
     <!-- Formulation -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Formulation</label>
-        <select name="formulation_id" class="form-select">
+        <select name="formulation_id" class="form-select select2-ajax" data-url="{{ route('admin.ajax.formulations') }}" data-placeholder="Search formulation...">
             <option value="">Select Formulation</option>
             @foreach($formulations as $formulation)
                 <option value="{{ $formulation->id }}"
@@ -17,7 +17,8 @@
     <!-- Medicine -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Medicine</label>
-        <select name="medicine_id" class="form-select">
+        <select name="medicine_id" class="form-select select2-ajax"
+        data-url="{{ route('admin.ajax.medicines') }}" data-placeholder="Search medicine...">
             <option value="">Select Medicine</option>
             @foreach($medicines as $medicine)
                 <option value="{{ $medicine->id }}"

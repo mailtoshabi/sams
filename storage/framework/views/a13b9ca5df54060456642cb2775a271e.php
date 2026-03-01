@@ -89,6 +89,16 @@
                         </ul>
                     </li>
 
+                    <li class="<?php echo e(request()->routeIs('admin.medicine_types.*') ? 'mm-active' : ''); ?>">
+                        <a href="javascript:void(0);" class="has-arrow <?php echo e(request()->routeIs('admin.medicine_types.*') ? 'mm-active' : ''); ?>">
+                            <i class="fas fa-capsules"></i> <span>Medicine Type</span>
+                        </a>
+                        <ul class="sub-menu <?php echo e(request()->routeIs('admin.medicine_types.*') ? 'mm-show' : ''); ?>">
+                            <li><a href="<?php echo e(route('admin.medicine_types.index')); ?>" class="<?php echo e(request()->routeIs('admin.medicine_types.index') ? 'active' : ''); ?>"><i class="fas fa-list"></i> All Medicine Type</a></li>
+                            <li><a href="<?php echo e(route('admin.medicine_types.create')); ?>" class="<?php echo e(request()->routeIs('admin.medicine_types.create') ? 'active' : ''); ?>"><i class="fas fa-plus-circle"></i> Add Medicine Type</a></li>
+                        </ul>
+                    </li>
+
                     <li class="<?php echo e(request()->routeIs('admin.formulations.*') ? 'mm-active' : ''); ?>">
                         <a href="javascript:void(0);" class="has-arrow <?php echo e(request()->routeIs('admin.formulations.*') ? 'mm-active' : ''); ?>">
                             <i class="fas fa-vial"></i> <span>Formulations</span>

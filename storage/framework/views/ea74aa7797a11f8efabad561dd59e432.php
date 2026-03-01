@@ -35,6 +35,24 @@
         </select>
     </div>
 
+    <!-- Medicine Type -->
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Medicine Types</label>
+        <select name="medicine_type_id" id="medicine_type_id" class="form-select select2-ajax"
+                data-url="<?php echo e(route('admin.ajax.medicine_types')); ?>"
+                data-depends="#division_id"
+                data-placeholder="Search Medicine Type...">
+            <option value="">Select Chapter</option>
+
+            <?php if(!empty($selected->medicine_type_id)): ?>
+                <?php $chap = \App\Models\MedicineType::find($selected->medicine_type_id); ?>
+                <?php if($chap): ?>
+                    <option value="<?php echo e($chap->id); ?>" selected><?php echo e($chap->name); ?></option>
+                <?php endif; ?>
+            <?php endif; ?>
+        </select>
+    </div>
+
     <!-- Formulation -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Formulation</label>
