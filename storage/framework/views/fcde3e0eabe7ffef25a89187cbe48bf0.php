@@ -103,7 +103,12 @@
 
                                 
                                 <td>
-                                    <?php if($item->medicine): ?>
+                                    <?php if($item->medicine && $item->disease): ?>
+                                        <span class="badge bg-info text-dark">Medicine</span> <?php echo e($item->medicine->name); ?>
+
+                                        <span class="badge bg-danger">Disease</span> <?php echo e($item->disease->name); ?>
+
+                                    <?php elseif($item->medicine): ?>
                                         <span class="badge bg-info text-dark">Medicine</span> <?php echo e($item->medicine->name); ?>
 
                                     <?php elseif($item->disease): ?>

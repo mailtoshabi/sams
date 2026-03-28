@@ -19,7 +19,7 @@ class ProceedureController extends Controller
 
     public function create()
     {
-        $titles = Title::where('status', 'published')->oldest()->get();;
+        $titles = Title::where('status', 'published')->where('type', 'procedure')->oldest()->get();;
         return view('admin.proceedures.create', compact('titles'));
     }
 
@@ -62,7 +62,7 @@ class ProceedureController extends Controller
 
     public function edit(Proceedure $proceedure)
     {
-        $titles = Title::where('status', 'published')->oldest()->get();;
+        $titles = Title::where('status', 'published')->where('type', 'procedure')->oldest()->get();;
         $proceedure->load('titles');
         return view('admin.proceedures.edit', compact('proceedure', 'titles'));
     }

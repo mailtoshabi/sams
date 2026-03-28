@@ -26,6 +26,21 @@
         </select>
     </div>
 
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Medicine Type</label>
+        <select name="medicine_type_id" class="form-select">
+            <option value="">Select Type</option>
+
+            <?php $__currentLoopData = $medicine_types; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $medicine_type): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <option value="<?php echo e($medicine_type->id); ?>"
+                    <?php if(old('medicine_type_id', $medicine->medicine_type_id ?? null) == $medicine_type->id): echo 'selected'; endif; ?>>
+                    <?php echo e($medicine_type->name); ?>
+
+                </option>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        </select>
+    </div>
+
     
     <div class="col-md-6">
         <label class="form-label fw-semibold">Main Image</label>
@@ -48,6 +63,8 @@
 
 
 <h5 class="mb-3">Titles & Detailed Information</h5>
+<?php echo e($titles->count()); ?>
+
 <?php if($titles->count() > 0): ?>
     <?php $__currentLoopData = $titles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $title): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <?php

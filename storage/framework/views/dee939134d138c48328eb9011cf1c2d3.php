@@ -19,6 +19,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Type</th>
                     <th>Status</th>
                     <th>Titles</th>
                     <th>Updated</th>
@@ -33,6 +34,7 @@
                             <strong><?php echo e($medicine->name); ?></strong><br>
                             <small class="text-muted"><?php echo e($medicine->slug); ?></small>
                         </td>
+                        <td><?php echo e($medicine->medicineType?->name ?? 'No type assigned'); ?></td>
                         <td>
                             <span class="badge bg-<?php echo e($medicine->status === 'published' ? 'success' : 'secondary'); ?>">
                                 <?php echo e(ucfirst($medicine->status)); ?>

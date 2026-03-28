@@ -35,6 +35,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Category</th>
                         <th>Status</th>
                         <th>Updated</th>
                         <th class="text-center">Actions</th>
@@ -45,6 +46,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $t->name }}</td>
+                            <td>{{ ucfirst($t->type) }}</td>
                             <td>
                                 <span class="badge bg-{{ $t->status == 'published' ? 'success' : 'secondary' }}">
                                     {{ ucfirst($t->status) }}

@@ -24,8 +24,14 @@
                 'selected' => $contentItem,
             ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1])); ?>
 
-            <?php echo $__env->renderWhen($selectedCategory === \App\Http\Utilities\Utility::CATEGORY_PATENT_MEDICINE || $selectedCategory === \App\Http\Utilities\Utility::CATEGORY_MORDERN_DISEASE, 'admin.content-items.partials._disease_fields', [
+            <?php echo $__env->renderWhen($selectedCategory === \App\Http\Utilities\Utility::CATEGORY_MORDERN_DISEASE, 'admin.content-items.partials._disease_fields', [
                 'diseases' => App\Models\Disease::all(),
+                'selected' => $contentItem,
+            ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1])); ?>
+
+            <?php echo $__env->renderWhen($selectedCategory === \App\Http\Utilities\Utility::CATEGORY_PATENT_MEDICINE, 'admin.content-items.partials._disease_patent_fields', [
+                'diseases' => App\Models\Disease::all(),
+                'medicines' => App\Models\Medicine::all(),
                 'selected' => $contentItem,
             ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1])); ?>
 

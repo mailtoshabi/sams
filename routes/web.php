@@ -21,7 +21,10 @@ use App\Http\Controllers\Admin\{
     MedicineController, DiseaseController, ProceedureController,
     DivisionController, ChapterController, FormulationController,
     DivisionChapterController, DivisionProceedureController,
-    MedicineTypeController
+    MedicineTypeController, CommercialOushadhaKalpanaController,
+    PharmaceuticalFormController, ManufacturingCompanyController,
+    NewPharmaceuticalFormController, TherapeuticDifferenceController,
+    AuthorController, RawDrugIndexController, ArticleController
 };
 
 use App\Http\Controllers\Admin\UserController;
@@ -123,6 +126,14 @@ Route::prefix('super/admin')->middleware(['auth:web'])->group(function () {
     Route::resource('chapters', ChapterController::class, ['as' => 'admin']);
     Route::resource('medicine_types', MedicineTypeController::class, ['as' => 'admin']);
     Route::resource('formulations', FormulationController::class, ['as' => 'admin']);
+    Route::resource('commercial_oushadha_kalpanas', CommercialOushadhaKalpanaController::class, ['as' => 'admin']);
+    Route::resource('pharmaceutical_forms', PharmaceuticalFormController::class, ['as' => 'admin']);
+    Route::resource('manufacturing_companies', ManufacturingCompanyController::class, ['as' => 'admin']);
+    Route::resource('new_pharmaceutical_forms', NewPharmaceuticalFormController::class, ['as' => 'admin']);
+    Route::resource('therapeutic_differences', TherapeuticDifferenceController::class, ['as' => 'admin']);
+    Route::resource('authors', AuthorController::class, ['as' => 'admin']);
+    Route::resource('raw_drug_indices', RawDrugIndexController::class, ['as' => 'admin']);
+    Route::resource('articles', ArticleController::class, ['as' => 'admin']);
 
     // CREATE content under a specific category
     Route::get('/content-items/{category_id}/specific', [ContentItemController::class, 'specific'])

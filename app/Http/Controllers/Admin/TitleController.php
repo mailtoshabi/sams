@@ -38,10 +38,10 @@ class TitleController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:titles,name',
             'description' => 'nullable|string',
-            'status' => 'required|in:draft,published',
+            'type' => 'required|in:medicine,disease,procedure',
         ]);
 
-        $validated['status'] = $validated['status'] ?? 'draft';
+        $validated['status'] = 'published';
         $validated['slug'] = Str::slug($request->name);
         $validated['user_id'] = auth()->id();
 
@@ -61,7 +61,7 @@ class TitleController extends Controller
         $validated = $request->validate([
             'name' => 'required|unique:titles,name,' . $title->id,
             'description' => 'nullable|string',
-            'status' => 'required|in:draft,published',
+            'type' => 'required|in:medicine,disease,procedure',
         ]);
 
         $validated['slug'] = Str::slug($request->name);

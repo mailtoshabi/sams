@@ -8,9 +8,16 @@ return new class extends Migration {
             $table->id();
             $table->string('name')->index();
             $table->string('slug')->unique();
+
+            $table->enum('type', ['medicine', 'disease', 'procedure'])->index();
+
             $table->text('description')->nullable();
             $table->enum('status',['draft','published'])->default('draft');
-            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+
+            $table->foreignId('user_id')->nullable()
+                ->constrained('users')
+                ->nullOnDelete();
+
             $table->timestamps();
         });
     }

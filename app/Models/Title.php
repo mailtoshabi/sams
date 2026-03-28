@@ -10,7 +10,7 @@ class Title extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'slug', 'description', 'status', 'user_id'
+        'name', 'slug', 'type', 'description', 'status', 'user_id'
     ];
 
     protected static function boot()

@@ -109,6 +109,26 @@
                         </ul>
                     </li>
 
+                    <li class="<?php echo e(request()->routeIs('admin.pharmaceutical_forms.*') ? 'mm-active' : ''); ?>">
+                        <a href="javascript:void(0);" class="has-arrow <?php echo e(request()->routeIs('admin.pharmaceutical_forms.*') ? 'mm-active' : ''); ?>">
+                            <i class="bi bi-eyedropper"></i> <span>Pharmaceutical Forms</span>
+                        </a>
+                        <ul class="sub-menu <?php echo e(request()->routeIs('admin.pharmaceutical_forms.*') ? 'mm-show' : ''); ?>">
+                            <li><a href="<?php echo e(route('admin.pharmaceutical_forms.index')); ?>" class="<?php echo e(request()->routeIs('admin.pharmaceutical_forms.index') ? 'active' : ''); ?>"><i class="fas fa-list"></i> All Forms</a></li>
+                            <li><a href="<?php echo e(route('admin.pharmaceutical_forms.create')); ?>" class="<?php echo e(request()->routeIs('admin.pharmaceutical_forms.create') ? 'active' : ''); ?>"><i class="fas fa-plus-circle"></i> Add Form</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="<?php echo e(request()->routeIs('admin.manufacturing_companies.*') ? 'mm-active' : ''); ?>">
+                        <a href="javascript:void(0);" class="has-arrow <?php echo e(request()->routeIs('admin.manufacturing_companies.*') ? 'mm-active' : ''); ?>">
+                            <i class="fas fa-industry"></i> <span>Manufacturing Companies</span>
+                        </a>
+                        <ul class="sub-menu <?php echo e(request()->routeIs('admin.manufacturing_companies.*') ? 'mm-show' : ''); ?>">
+                            <li><a href="<?php echo e(route('admin.manufacturing_companies.index')); ?>" class="<?php echo e(request()->routeIs('admin.manufacturing_companies.index') ? 'active' : ''); ?>"><i class="fas fa-list"></i> All Companies</a></li>
+                            <li><a href="<?php echo e(route('admin.manufacturing_companies.create')); ?>" class="<?php echo e(request()->routeIs('admin.manufacturing_companies.create') ? 'active' : ''); ?>"><i class="fas fa-plus-circle"></i> Add Company</a></li>
+                        </ul>
+                    </li>
+
                     
                     <li class="menu-title text-uppercase mt-3">Medical Repository</li>
 
@@ -159,17 +179,18 @@
                             <i class="fas fa-clipboard-list"></i> <span>Appendix</span>
                         </a>
                         <ul class="sub-menu">
-                            <li><a href="#"><i class="fas fa-vials"></i> COMMERCIAL OUSHADHA KALPANAS</a></li>
-                            <li><a href="#"><i class="fas fa-flask"></i> NEW PHARMACEUTICAL FORMS</a></li>
+                            <li><a href="<?php echo e(route('admin.commercial_oushadha_kalpanas.index')); ?>"><i class="fas fa-vials"></i> COMMERCIAL OUSHADHA KALPANAS</a></li>
+                            <li><a href="<?php echo e(route('admin.new_pharmaceutical_forms.index')); ?>"><i class="fas fa-flask"></i> NEW PHARMACEUTICAL FORMS</a></li>
                             <li><a href="#"><i class="fas fa-project-diagram"></i> DOSHA GUNA BASED CLASSIFICATION</a></li>
-                            <li><a href="#"><i class="fas fa-notes-medical"></i> THERAPEUTIC DIFFERENCES</a></li>
+                            <li><a href="<?php echo e(route('admin.therapeutic_differences.index')); ?>"><i class="fas fa-notes-medical"></i> THERAPEUTIC DIFFERENCES</a></li>
                             <li><a href="#"><i class="fas fa-apple-alt"></i> MEDICATED FOOD SUBSTANCES</a></li>
                             <li><a href="#"><i class="fas fa-hourglass-half"></i> EXPIRY DATE FOR AYURVEDIC PRODUCTS</a></li>
                             <li><a href="#"><i class="fas fa-skull-crossbones"></i> LIST OF POISONOUS DRUGS</a></li>
                             <li><a href="#"><i class="fas fa-leaf"></i> NON-COMMERCIAL CLASSICAL MEDICINES</a></li>
-                            <li><a href="#"><i class="fas fa-seedling"></i> RAW DRUG INDEX</a></li>
+                            <li><a href="<?php echo e(route('admin.raw_drug_indices.index')); ?>"><i class="fas fa-seedling"></i> RAW DRUG INDEX</a></li>
                             <li><a href="#"><i class="fas fa-yin-yang"></i> SIDDHA MEDICINES</a></li>
-                            <li><a href="#"><i class="fas fa-newspaper"></i> ARTICLES</a></li>
+                            <li><a href="<?php echo e(route('admin.authors.index')); ?>"><i class="fas fa-user-edit"></i> AUTHORS</a></li>
+                            <li><a href="<?php echo e(route('admin.articles.index')); ?>"><i class="fas fa-newspaper"></i> ARTICLES</a></li>
                         </ul>
                     </li>
                 <?php endif; ?>

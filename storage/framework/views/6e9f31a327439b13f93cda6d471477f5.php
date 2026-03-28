@@ -34,6 +34,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Category</th>
                         <th>Status</th>
                         <th>Updated</th>
                         <th class="text-center">Actions</th>
@@ -44,6 +45,7 @@
                         <tr>
                             <td><?php echo e($loop->iteration); ?></td>
                             <td><?php echo e($t->name); ?></td>
+                            <td><?php echo e(ucfirst($t->type)); ?></td>
                             <td>
                                 <span class="badge bg-<?php echo e($t->status == 'published' ? 'success' : 'secondary'); ?>">
                                     <?php echo e(ucfirst($t->status)); ?>
