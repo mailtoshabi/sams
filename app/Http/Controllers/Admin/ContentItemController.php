@@ -111,7 +111,7 @@ class ContentItemController extends Controller
     }
 
     // 🟧 UPDATE EXISTING CONTENT
-    public function update(Request $request, ContentItem $contentItem)
+    public function update(Request $request, ContentItem $content_item)
     {
         $validated = $request->validate([
             'category_id' => 'required|exists:categories,id',
@@ -126,7 +126,7 @@ class ContentItemController extends Controller
 
         $validated['user_id'] = auth()->id();
 
-        $contentItem->update($validated);
+        $content_item->update($validated);
 
         return redirect()->route('admin.content-items.index')
             ->with('success', 'Content item updated successfully.');
@@ -182,9 +182,9 @@ class ContentItemController extends Controller
 
 
     // 🟥 DELETE
-    public function destroy(ContentItem $contentItem)
+    public function destroy(ContentItem $content_item)
     {
-        $contentItem->delete();
+        $content_item->delete();
         return redirect()->route('admin.content-items.index')
             ->with('success', 'Content item deleted successfully.');
     }
