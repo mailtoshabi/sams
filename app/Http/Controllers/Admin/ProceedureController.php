@@ -11,9 +11,22 @@ use Illuminate\Support\Str;
 
 class ProceedureController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $proceedures = Proceedure::with('titles')->oldest()->paginate(20);
+        $query = Proceedure::with('titles');
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', "%{$request->search}%")
+                    ->orWhere('ayurveda_name', 'like', "%{$request->search}%");
+            });
+        }
+
+        if ($request->filled('status') && $request->status !== 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $proceedures = $query->oldest()->paginate(20)->appends($request->all());
         return view('admin.proceedures.index', compact('proceedures'));
     }
 

@@ -45,7 +45,7 @@
             const dependsSelector = el.dataset.depends || null;
 
             $(el).select2({
-                theme: 'classic', // optional (or remove to use default)
+                theme: 'classic',
                 placeholder: placeholder,
                 allowClear: true,
                 width: '100%',
@@ -56,10 +56,9 @@
                     delay: 300,
                     data: function(params) {
                         const query = {
-                            q: params.term, // search term
+                            q: params.term,
                             page: params.page || 1
                         };
-                        // pass dependent select value if exists
                         if (dependsSelector) {
                             const dep = document.querySelector(dependsSelector);
                             if (dep && dep.value) query.dependency = dep.value;
@@ -76,6 +75,21 @@
                         };
                     },
                     cache: true
+                }
+            }).on('select2:open', function(e) {
+                // Focus the search field when opened
+                setTimeout(() => {
+                    const searchField = document.querySelector('.select2-search__field');
+                    if (searchField) {
+                        searchField.focus();
+                    }
+                }, 50);
+            });
+
+            // Automatically open Select2 on focus
+            $(el).on('focus', function(e) {
+                if (!$(this).data('select2').isOpen()) {
+                    $(this).select2('open');
                 }
             });
 

@@ -15,9 +15,22 @@ class MedicineController extends Controller
     /**
      * Display all medicines.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $medicines = Medicine::with('titles')->oldest()->paginate(20);
+        $query = Medicine::with('titles');
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', "%{$request->search}%")
+                    ->orWhere('ayurveda_name', 'like', "%{$request->search}%");
+            });
+        }
+
+        if ($request->filled('status') && $request->status !== 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $medicines = $query->oldest()->paginate(20)->appends($request->all());
         return view('admin.medicines.index', compact('medicines'));
     }
 

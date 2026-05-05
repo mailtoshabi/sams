@@ -13,7 +13,29 @@
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
+    <form method="GET" action="{{ route('admin.medicines.index') }}" class="row g-2 mb-4">
+        <div class="col-md-4">
+            <input type="text" name="search" class="form-control" placeholder="Search by name"
+                   value="{{ request('search') }}">
+        </div>
 
+        <div class="col-md-3">
+            <select name="status" class="form-select">
+                <option value="all">All Status</option>
+                <option value="published" {{ request('status') == 'published' ? 'selected' : '' }}>Published</option>
+                <option value="draft" {{ request('status') == 'draft' ? 'selected' : '' }}>Draft</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="bi bi-search"></i> Filter
+            </button>
+            <a href="{{ route('admin.medicines.index') }}" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-repeat"></i> Reset
+            </a>
+        </div>
+    </form>
     <div class="table-responsive">
         <table class="table table-bordered align-middle">
             <thead class="table-light">

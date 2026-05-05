@@ -11,9 +11,22 @@ use Illuminate\Support\Str;
 
 class DiseaseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $diseases = Disease::with('titles')->oldest()->paginate(20);
+        $query = Disease::with('titles');
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', "%{$request->search}%")
+                    ->orWhere('ayurveda_name', 'like', "%{$request->search}%");
+            });
+        }
+
+        if ($request->filled('status') && $request->status !== 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $diseases = $query->oldest()->paginate(20)->appends($request->all());
         return view('admin.diseases.index', compact('diseases'));
     }
 
