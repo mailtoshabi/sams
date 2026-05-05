@@ -10,6 +10,7 @@ return new class extends Migration {
             $table->string('slug')->unique();
 
             $table->enum('type', ['medicine', 'disease', 'procedure'])->index();
+            $table->integer('order_number')->default(0);
 
             $table->text('description')->nullable();
             $table->enum('status',['draft','published'])->default('draft');

@@ -7,7 +7,7 @@
                class="form-control" required>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-3">
         <label class="form-label fw-semibold">Type</label>
         <select name="type" class="form-select" required>
             <option value="">Select Type</option>
@@ -15,6 +15,13 @@
             <option value="disease" {{ old('type', $title->type ?? '') == 'disease' ? 'selected' : '' }}>Disease</option>
             <option value="procedure" {{ old('type', $title->type ?? '') == 'procedure' ? 'selected' : '' }}>Procedure</option>
         </select>
+    </div>
+
+    <div class="col-md-3">
+        <label class="form-label fw-semibold">Order Number</label>
+        <input type="number" name="order_number"
+               value="{{ old('order_number', $title->order_number ?? 0) }}"
+               class="form-control">
     </div>
 
     {{-- <div class="col-md-6">

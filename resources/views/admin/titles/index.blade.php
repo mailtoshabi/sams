@@ -44,6 +44,7 @@
                         <tr>
                             <th>#</th>
                             <th>Name</th>
+                            <th>Order</th>
                             <th>Type</th>
                             <th>Status</th>
                             <th>Updated</th>
@@ -55,6 +56,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $t->name }}</td>
+                                <td>{{ $t->order_number }}</td>
                                 <td>{{ ucfirst($t->type) }}</td>
                                 <td>
                                     <span class="badge bg-{{ $t->status == 'published' ? 'success' : 'secondary' }}">
@@ -74,7 +76,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="5" class="text-center text-muted py-3">No titles found.</td>
+                                <td colspan="6" class="text-center text-muted py-3">No titles found.</td>
                             </tr>
                         @endforelse
                     </tbody>

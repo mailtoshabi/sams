@@ -28,7 +28,7 @@ class TitleController extends Controller
             $query->where('type', $request->type);
         }
 
-        $titles = $query->oldest()->paginate(15)->appends($request->all());
+        $titles = $query->orderBy('order_number')->oldest()->paginate(15)->appends($request->all());
 
         return view('admin.titles.index', compact('titles'));
     }
@@ -44,6 +44,7 @@ class TitleController extends Controller
             'name' => 'required|unique:titles,name',
             'description' => 'nullable|string',
             'type' => 'required|in:medicine,disease,procedure',
+            'order_number' => 'nullable|integer',
         ]);
 
         $validated['status'] = 'published';
@@ -67,6 +68,7 @@ class TitleController extends Controller
             'name' => 'required|unique:titles,name,' . $title->id,
             'description' => 'nullable|string',
             'type' => 'required|in:medicine,disease,procedure',
+            'order_number' => 'nullable|integer',
         ]);
 
         $validated['slug'] = Str::slug($request->name);

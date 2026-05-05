@@ -27,8 +27,8 @@ class MedicineController extends Controller
     public function create()
     {
         $medicine_types = MedicineType::where('status', 'published')->oldest()->get();
-        $titles = Title::where('status', 'published')->where('type', 'medicine')->oldest()->get();
-        return view('admin.medicines.create', compact('titles','medicine_types'));
+        $titles = Title::where('status', 'published')->where('type', 'medicine')->orderBy('order_number')->oldest()->get();
+        return view('admin.medicines.create', compact('titles', 'medicine_types'));
     }
 
     /**
@@ -83,10 +83,10 @@ class MedicineController extends Controller
      */
     public function edit(Medicine $medicine)
     {
-        $titles = Title::where('status', 'published')->where('type', 'medicine')->oldest()->get();
+        $titles = Title::where('status', 'published')->where('type', 'medicine')->orderBy('order_number')->oldest()->get();
         $medicine_types = MedicineType::where('status', 'published')->oldest()->get();
         $medicine->load('titles');
-        return view('admin.medicines.edit', compact('medicine', 'titles','medicine_types'));
+        return view('admin.medicines.edit', compact('medicine', 'titles', 'medicine_types'));
     }
 
     /**
