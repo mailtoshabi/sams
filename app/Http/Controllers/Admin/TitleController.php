@@ -23,6 +23,11 @@ class TitleController extends Controller
             $query->where('status', $request->status);
         }
 
+        // 🧬 Filter by type
+        if ($request->filled('type') && $request->type !== 'all') {
+            $query->where('type', $request->type);
+        }
+
         $titles = $query->oldest()->paginate(15)->appends($request->all());
 
         return view('admin.titles.index', compact('titles'));
