@@ -111,7 +111,7 @@
 
                     <li class="<?php echo e(request()->routeIs('admin.pharmaceutical_forms.*') ? 'mm-active' : ''); ?>">
                         <a href="javascript:void(0);" class="has-arrow <?php echo e(request()->routeIs('admin.pharmaceutical_forms.*') ? 'mm-active' : ''); ?>">
-                            <i class="fas fa-flask-vial"></i> <span>Pharmaceutical Forms</span>
+                            <i class="bi bi-eyedropper"></i> <span>Pharmaceutical Forms</span>
                         </a>
                         <ul class="sub-menu <?php echo e(request()->routeIs('admin.pharmaceutical_forms.*') ? 'mm-show' : ''); ?>">
                             <li><a href="<?php echo e(route('admin.pharmaceutical_forms.index')); ?>" class="<?php echo e(request()->routeIs('admin.pharmaceutical_forms.index') ? 'active' : ''); ?>"><i class="fas fa-list"></i> All Forms</a></li>
@@ -189,6 +189,7 @@
                             <li><a href="#"><i class="fas fa-leaf"></i> NON-COMMERCIAL CLASSICAL MEDICINES</a></li>
                             <li><a href="<?php echo e(route('admin.raw_drug_indices.index')); ?>"><i class="fas fa-seedling"></i> RAW DRUG INDEX</a></li>
                             <li><a href="#"><i class="fas fa-yin-yang"></i> SIDDHA MEDICINES</a></li>
+                            <li><a href="<?php echo e(route('admin.authors.index')); ?>"><i class="fas fa-user-edit"></i> AUTHORS</a></li>
                             <li><a href="<?php echo e(route('admin.articles.index')); ?>"><i class="fas fa-newspaper"></i> ARTICLES</a></li>
                         </ul>
                     </li>

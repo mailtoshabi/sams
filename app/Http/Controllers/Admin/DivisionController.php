@@ -41,7 +41,7 @@ class DivisionController extends Controller
             'name' => 'required|string|max:255',
             'ayurveda_name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'status' => $request->status,
+            'status' => 'nullable|string|in:published,draft',
         ]);
         $validated['slug'] = Str::slug($validated['name']);
         $validated['user_id'] = auth()->id() ?? 1;

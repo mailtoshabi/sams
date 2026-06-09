@@ -12,7 +12,29 @@
     <?php if(session('success')): ?>
         <div class="alert alert-success"><?php echo e(session('success')); ?></div>
     <?php endif; ?>
+    <form method="GET" action="<?php echo e(route('admin.diseases.index')); ?>" class="row g-2 mb-4">
+        <div class="col-md-4">
+            <input type="text" name="search" class="form-control" placeholder="Search by name"
+                   value="<?php echo e(request('search')); ?>">
+        </div>
 
+        <div class="col-md-3">
+            <select name="status" class="form-select">
+                <option value="all">All Status</option>
+                <option value="published" <?php echo e(request('status') == 'published' ? 'selected' : ''); ?>>Published</option>
+                <option value="draft" <?php echo e(request('status') == 'draft' ? 'selected' : ''); ?>>Draft</option>
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <button type="submit" class="btn btn-outline-primary">
+                <i class="bi bi-search"></i> Filter
+            </button>
+            <a href="<?php echo e(route('admin.diseases.index')); ?>" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-repeat"></i> Reset
+            </a>
+        </div>
+    </form>
     <div class="table-responsive">
         <table class="table table-bordered align-middle">
             <thead class="table-light">

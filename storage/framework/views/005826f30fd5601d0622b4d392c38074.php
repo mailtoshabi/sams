@@ -4,7 +4,7 @@
     <div class="col-md-6">
         <label class="form-label fw-semibold">Division</label>
         <select name="division_id" id="division_id" class="form-select select2-ajax"
-                data-url="<?php echo e(route('admin.ajax.divisions')); ?>" data-placeholder="Search division...">
+            data-url="<?php echo e(route('admin.ajax.divisions')); ?>" data-placeholder="Search division...">
             <option value="">Select Division</option>
 
             
@@ -21,9 +21,8 @@
     <div class="col-md-6">
         <label class="form-label fw-semibold">Chapter</label>
         <select name="chapter_id" id="chapter_id" class="form-select select2-ajax"
-                data-url="<?php echo e(route('admin.ajax.chapters')); ?>"
-                data-depends="#division_id"
-                data-placeholder="Search chapter...">
+            data-url="<?php echo e(route('admin.ajax.chapters')); ?>" data-depends="#division_id"
+            data-placeholder="Search chapter...">
             <option value="">Select Chapter</option>
 
             <?php if(!empty($selected->chapter_id)): ?>
@@ -39,9 +38,8 @@
     <div class="col-md-6">
         <label class="form-label fw-semibold">Medicine Types</label>
         <select name="medicine_type_id" id="medicine_type_id" class="form-select select2-ajax"
-                data-url="<?php echo e(route('admin.ajax.medicine_types')); ?>"
-                data-depends="#division_id"
-                data-placeholder="Search Medicine Type...">
+            data-url="<?php echo e(route('admin.ajax.medicine_types')); ?>" data-depends="#division_id"
+            data-placeholder="Search Medicine Type...">
             <option value="">Select Chapter</option>
 
             <?php if(!empty($selected->medicine_type_id)): ?>
@@ -57,7 +55,7 @@
     <div class="col-md-6">
         <label class="form-label fw-semibold">Formulation</label>
         <select name="formulation_id" id="formulation_id" class="form-select select2-ajax"
-                data-url="<?php echo e(route('admin.ajax.formulations')); ?>" data-placeholder="Search formulation...">
+            data-url="<?php echo e(route('admin.ajax.formulations')); ?>" data-placeholder="Search formulation...">
             <option value="">Select Formulation</option>
 
             <?php if(!empty($selected->formulation_id)): ?>
@@ -73,7 +71,7 @@
     <div class="col-md-6">
         <label class="form-label fw-semibold">Medicine</label>
         <select name="medicine_id" id="medicine_id" class="form-select select2-ajax"
-                data-url="<?php echo e(route('admin.ajax.medicines')); ?>" data-placeholder="Search medicine...">
+            data-url="<?php echo e(route('admin.ajax.medicines')); ?>" data-placeholder="Search medicine...">
             <option value="">Select Medicine</option>
 
             <?php if(!empty($selected->medicine_id)): ?>
@@ -85,5 +83,4 @@
         </select>
     </div>
 
-</div>
-<?php /**PATH C:\xampp\htdocs\sams\resources\views\admin\content-items\partials\_classical_fields.blade.php ENDPATH**/ ?>
+</div><?php /**PATH C:\xampp\htdocs\sams\resources\views\admin\content-items\partials\_classical_fields.blade.php ENDPATH**/ ?>
