@@ -15,16 +15,6 @@
         <input type="text" name="ayurveda_name" class="form-control"
             value="{{ old('ayurveda_name', $medicine->ayurveda_name ?? '') }}" placeholder="Enter Ayurveda name">
     </div>
-    {{-- Status --}}
-    <div class="col-md-6">
-        <label class="form-label fw-semibold">Status</label>
-        <select name="status" class="form-select">
-            <option value="published" {{ old('status', $medicine->status ?? '') === 'published' ? 'selected' : '' }}>
-                Published</option>
-            <option value="draft" {{ old('status', $medicine->status ?? '') === 'draft' ? 'selected' : '' }}>Draft
-            </option>
-        </select>
-    </div>
 
     <div class="col-md-6">
         <label class="form-label fw-semibold">Medicine Type</label>
@@ -34,6 +24,19 @@
             @foreach ($medicine_types as $medicine_type)
                 <option value="{{ $medicine_type->id }}" @selected(old('medicine_type_id', $medicine->medicine_type_id ?? null) == $medicine_type->id)>
                     {{ $medicine_type->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Formulation</label>
+        <select name="formulation_id" class="form-select">
+            <option value="">Select Formulation</option>
+
+            @foreach ($formulations as $formulation)
+                <option value="{{ $formulation->id }}" @selected(old('formulation_id', $medicine->formulation_id ?? null) == $formulation->id)>
+                    {{ $formulation->name }}
                 </option>
             @endforeach
         </select>
@@ -51,6 +54,17 @@
                 <img id="mainPreviewImage" src="#" width="120" class="rounded border d-none">
             @endif
         </div>
+    </div>
+
+    {{-- Status --}}
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Status</label>
+        <select name="status" class="form-select">
+            <option value="published" {{ old('status', $medicine->status ?? '') === 'published' ? 'selected' : '' }}>
+                Published</option>
+            <option value="draft" {{ old('status', $medicine->status ?? '') === 'draft' ? 'selected' : '' }}>Draft
+            </option>
+        </select>
     </div>
 
     {{-- Description --}}

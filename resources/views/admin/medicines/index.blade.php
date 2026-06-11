@@ -43,6 +43,7 @@
                     <th>#</th>
                     <th>Name</th>
                     <th>Type</th>
+                    <th>Formulation</th>
                     <th>Status</th>
                     <th>Titles</th>
                     <th>Updated</th>
@@ -58,6 +59,7 @@
                             <small class="text-muted">{{ $medicine->slug }}</small>
                         </td>
                         <td>{{ $medicine->medicineType?->name ?? 'No type assigned' }}</td>
+                        <td>{{ $medicine->formulation?->name ?? 'No formulation assigned' }}</td>
                         <td>
                             <span class="badge bg-{{ $medicine->status === 'published' ? 'success' : 'secondary' }}">
                                 {{ ucfirst($medicine->status) }}
@@ -86,7 +88,7 @@
 
                     </tr>
                 @empty
-                    <tr><td colspan="6" class="text-center text-muted">No medicines found</td></tr>
+                    <tr><td colspan="8" class="text-center text-muted">No medicines found</td></tr>
                 @endforelse
             </tbody>
         </table>

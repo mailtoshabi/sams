@@ -42,6 +42,20 @@
                             <th width="180">Name</th>
                             <td>{{ $medicine->name }}</td>
                         </tr>
+                        @if(!empty($medicine->ayurveda_name))
+                        <tr>
+                            <th>Ayurveda Name</th>
+                            <td>{{ $medicine->ayurveda_name }}</td>
+                        </tr>
+                        @endif
+                        <tr>
+                            <th>Medicine Type</th>
+                            <td>{{ $medicine->medicineType?->name ?? 'No type assigned' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Formulation</th>
+                            <td>{{ $medicine->formulation?->name ?? 'No formulation assigned' }}</td>
+                        </tr>
                         <tr>
                             <th>Status</th>
                             <td>

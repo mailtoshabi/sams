@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Medicine;
 use App\Models\MedicineType;
+use App\Models\Formulation;
 use App\Models\Title;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -17,7 +18,7 @@ class MedicineController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Medicine::with('titles');
+        $query = Medicine::with(['titles', 'medicineType', 'formulation']);
 
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
@@ -40,8 +41,9 @@ class MedicineController extends Controller
     public function create()
     {
         $medicine_types = MedicineType::where('status', 'published')->oldest()->get();
+        $formulations = Formulation::where('status', 'published')->oldest()->get();
         $titles = Title::where('status', 'published')->where('type', 'medicine')->orderBy('order_number')->oldest()->get();
-        return view('admin.medicines.create', compact('titles', 'medicine_types'));
+        return view('admin.medicines.create', compact('titles', 'medicine_types', 'formulations'));
     }
 
     /**
@@ -53,6 +55,7 @@ class MedicineController extends Controller
             'name' => 'required|string|max:255',
             'ayurveda_name' => 'required|string|max:255',
             'medicine_type_id' => 'required',
+            'formulation_id' => 'nullable|exists:formulations,id',
             // 'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
@@ -98,8 +101,9 @@ class MedicineController extends Controller
     {
         $titles = Title::where('status', 'published')->where('type', 'medicine')->orderBy('order_number')->oldest()->get();
         $medicine_types = MedicineType::where('status', 'published')->oldest()->get();
-        $medicine->load('titles');
-        return view('admin.medicines.edit', compact('medicine', 'titles', 'medicine_types'));
+        $formulations = Formulation::where('status', 'published')->oldest()->get();
+        $medicine->load(['titles', 'formulation']);
+        return view('admin.medicines.edit', compact('medicine', 'titles', 'medicine_types', 'formulations'));
     }
 
     /**
@@ -111,6 +115,7 @@ class MedicineController extends Controller
             'name' => 'required|string|max:255',
             'ayurveda_name' => 'required|string|max:255',
             'medicine_type_id' => 'required',
+            'formulation_id' => 'nullable|exists:formulations,id',
             // 'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
@@ -156,7 +161,7 @@ class MedicineController extends Controller
 
     public function show(Medicine $medicine)
     {
-        $medicine->load(['titles', 'user']);
+        $medicine->load(['titles', 'user', 'medicineType', 'formulation']);
         return view('admin.medicines.show', compact('medicine'));
     }
 

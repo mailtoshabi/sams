@@ -163,4 +163,4 @@
             });
         });
     </script>
-<?php $__env->stopPush(); ?><?php /**PATH C:\xampp\htdocs\sams\resources\views\admin\medicines\_form.blade.php ENDPATH**/ ?>
+<?php $__env->stopPush(); ?><?php /**PATH C:\xampp\htdocs\sams\resources\views/admin/medicines/_form.blade.php ENDPATH**/ ?>
