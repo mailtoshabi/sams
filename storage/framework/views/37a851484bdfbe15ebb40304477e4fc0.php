@@ -41,6 +41,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Division</th>
                         <th>Status</th>
                         <th>Titles</th>
                         <th>Updated</th>
@@ -55,6 +56,7 @@
                                 <strong><?php echo e($proceedure->name); ?></strong><br>
                                 <small class="text-muted"><?php echo e($proceedure->slug); ?></small>
                             </td>
+                            <td><?php echo e($proceedure->division?->name ?? 'N/A'); ?></td>
                             <td>
                                 <span class="badge bg-<?php echo e($proceedure->status === 'published' ? 'success' : 'secondary'); ?>">
                                     <?php echo e(ucfirst($proceedure->status)); ?>
@@ -87,7 +89,7 @@
                         </tr>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <tr>
-                            <td colspan="6" class="text-center text-muted">No proceedures found</td>
+                            <td colspan="7" class="text-center text-muted">No proceedures found</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

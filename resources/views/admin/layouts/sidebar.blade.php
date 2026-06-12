@@ -17,57 +17,6 @@
 
                 @if ($user->hasRole(['Administrator', 'Manager']))
 
-                    {{-- ============================================================
-                    📁 CONTENT MANAGEMENT SECTION
-                    ============================================================ --}}
-                    <!-- <li class="menu-title text-uppercase mt-3">Content Management</li>
-
-                                @php
-                                    $contentActive = request()->routeIs('admin.content-items.*') ||
-                                        request()->routeIs('admin.specific.category') ||
-                                        request()->routeIs('admin.specific.category.edit');
-
-                                    // $activeCategoryId = null;
-                                    try {
-                                        if (session('activeCategoryId')) {
-                                            $activeCategoryId = decrypt(session('activeCategoryId'));
-                                        }
-                                    } catch (Exception $e) {
-                                    }
-                                @endphp
-
-                                <li class="{{ $contentActive ? 'mm-active' : '' }}">
-                                    <a href="javascript:void(0);" class="has-arrow {{ $contentActive ? 'mm-active' : '' }}">
-                                        <i class="fas fa-folder-open"></i>
-                                        <span>Content Items</span>
-                                    </a>
-
-                                    <ul class="sub-menu {{ $contentActive ? 'mm-show' : '' }}" id="category-menu">
-                                        {{-- All Content Items --}}
-                                        <li>
-                                            <a href="{{ route('admin.content-items.index') }}"
-                                                class="{{ request()->routeIs('admin.content-items.index') ? 'active' : '' }}">
-                                                <i class="fas fa-list"></i> All Content Items
-                                            </a>
-                                        </li>
-
-                                        {{-- Dynamic Categories --}}
-                                        @foreach ($categories as $category)
-                                            @php
-                                                $isActiveCategory = ($activeCategoryId == $category->id)
-                                                    || (request()->fullUrlIs('*' . encrypt($category->id) . '*'));
-                                            @endphp
-                                            <li>
-                                                <a href="{{ route('admin.specific.category', encrypt($category->id)) }}"
-                                                    data-category-id="{{ $category->id }}"
-                                                    class="{{ $isActiveCategory ? 'active text-primary fw-bold' : '' }}">
-                                                    <i class="{{ $category->fa_icon }}"></i> {{ $category->name }}
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </li> -->
-
                     {{-- Classical Diseases --}}
                     <li class="{{ request()->routeIs('admin.classical_diseases.*') ? 'mm-active' : '' }}">
                         <a href="javascript:void(0);"

@@ -18,56 +18,6 @@
                 <?php if($user->hasRole(['Administrator', 'Manager'])): ?>
 
                     
-                    <!-- <li class="menu-title text-uppercase mt-3">Content Management</li>
-
-                                <?php
-                                    $contentActive = request()->routeIs('admin.content-items.*') ||
-                                        request()->routeIs('admin.specific.category') ||
-                                        request()->routeIs('admin.specific.category.edit');
-
-                                    // $activeCategoryId = null;
-                                    try {
-                                        if (session('activeCategoryId')) {
-                                            $activeCategoryId = decrypt(session('activeCategoryId'));
-                                        }
-                                    } catch (Exception $e) {
-                                    }
-                                ?>
-
-                                <li class="<?php echo e($contentActive ? 'mm-active' : ''); ?>">
-                                    <a href="javascript:void(0);" class="has-arrow <?php echo e($contentActive ? 'mm-active' : ''); ?>">
-                                        <i class="fas fa-folder-open"></i>
-                                        <span>Content Items</span>
-                                    </a>
-
-                                    <ul class="sub-menu <?php echo e($contentActive ? 'mm-show' : ''); ?>" id="category-menu">
-                                        
-                                        <li>
-                                            <a href="<?php echo e(route('admin.content-items.index')); ?>"
-                                                class="<?php echo e(request()->routeIs('admin.content-items.index') ? 'active' : ''); ?>">
-                                                <i class="fas fa-list"></i> All Content Items
-                                            </a>
-                                        </li>
-
-                                        
-                                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <?php
-                                                $isActiveCategory = ($activeCategoryId == $category->id)
-                                                    || (request()->fullUrlIs('*' . encrypt($category->id) . '*'));
-                                            ?>
-                                            <li>
-                                                <a href="<?php echo e(route('admin.specific.category', encrypt($category->id))); ?>"
-                                                    data-category-id="<?php echo e($category->id); ?>"
-                                                    class="<?php echo e($isActiveCategory ? 'active text-primary fw-bold' : ''); ?>">
-                                                    <i class="<?php echo e($category->fa_icon); ?>"></i> <?php echo e($category->name); ?>
-
-                                                </a>
-                                            </li>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                    </ul>
-                                </li> -->
-
-                    
                     <li class="<?php echo e(request()->routeIs('admin.classical_diseases.*') ? 'mm-active' : ''); ?>">
                         <a href="javascript:void(0);"
                             class="has-arrow <?php echo e(request()->routeIs('admin.classical_diseases.*') ? 'mm-active' : ''); ?>">

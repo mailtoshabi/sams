@@ -18,52 +18,68 @@
                 <?php if($user->hasRole(['Administrator', 'Manager'])): ?>
 
                     
-                    <li class="menu-title text-uppercase mt-3">Content Management</li>
+                    <!-- <li class="menu-title text-uppercase mt-3">Content Management</li>
 
-                    <?php
-                        $contentActive = request()->routeIs('admin.content-items.*') ||
-                            request()->routeIs('admin.specific.category') ||
-                            request()->routeIs('admin.specific.category.edit');
-
-                        // $activeCategoryId = null;
-                        try {
-                            if (session('activeCategoryId')) {
-                                $activeCategoryId = decrypt(session('activeCategoryId'));
-                            }
-                        } catch (Exception $e) {
-                        }
-                    ?>
-
-                    <li class="<?php echo e($contentActive ? 'mm-active' : ''); ?>">
-                        <a href="javascript:void(0);" class="has-arrow <?php echo e($contentActive ? 'mm-active' : ''); ?>">
-                            <i class="fas fa-folder-open"></i>
-                            <span>Content Items</span>
-                        </a>
-
-                        <ul class="sub-menu <?php echo e($contentActive ? 'mm-show' : ''); ?>" id="category-menu">
-                            
-                            <li>
-                                <a href="<?php echo e(route('admin.content-items.index')); ?>"
-                                    class="<?php echo e(request()->routeIs('admin.content-items.index') ? 'active' : ''); ?>">
-                                    <i class="fas fa-list"></i> All Content Items
-                                </a>
-                            </li>
-
-                            
-                            <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <?php
-                                    $isActiveCategory = ($activeCategoryId == $category->id)
-                                        || (request()->fullUrlIs('*' . encrypt($category->id) . '*'));
-                                ?>
-                                <li>
-                                    <a href="<?php echo e(route('admin.specific.category', encrypt($category->id))); ?>"
-                                        data-category-id="<?php echo e($category->id); ?>"
-                                        class="<?php echo e($isActiveCategory ? 'active text-primary fw-bold' : ''); ?>">
-                                        <i class="<?php echo e($category->fa_icon); ?>"></i> <?php echo e($category->name); ?>
+                                    $contentActive = request()->routeIs('admin.content-items.*') ||
+                                        request()->routeIs('admin.specific.category') ||
+                                        request()->routeIs('admin.specific.category.edit');
 
+                                    // $activeCategoryId = null;
+                                    try {
+                                        if (session('activeCategoryId')) {
+                                            $activeCategoryId = decrypt(session('activeCategoryId'));
+                                        }
+                                    } catch (Exception $e) {
+                                    }
+                                ?>
+
+                                <li class="<?php echo e($contentActive ? 'mm-active' : ''); ?>">
+                                    <a href="javascript:void(0);" class="has-arrow <?php echo e($contentActive ? 'mm-active' : ''); ?>">
+                                        <i class="fas fa-folder-open"></i>
+                                        <span>Content Items</span>
                                     </a>
-                                </li>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                                    <ul class="sub-menu <?php echo e($contentActive ? 'mm-show' : ''); ?>" id="category-menu">
+                                        
+                                        <li>
+                                            <a href="<?php echo e(route('admin.content-items.index')); ?>"
+                                                class="<?php echo e(request()->routeIs('admin.content-items.index') ? 'active' : ''); ?>">
+                                                <i class="fas fa-list"></i> All Content Items
+                                            </a>
+                                        </li>
+
+                                        
+                                        <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                            <?php
+                                                $isActiveCategory = ($activeCategoryId == $category->id)
+                                                    || (request()->fullUrlIs('*' . encrypt($category->id) . '*'));
+                                            ?>
+                                            <li>
+                                                <a href="<?php echo e(route('admin.specific.category', encrypt($category->id))); ?>"
+                                                    data-category-id="<?php echo e($category->id); ?>"
+                                                    class="<?php echo e($isActiveCategory ? 'active text-primary fw-bold' : ''); ?>">
+                                                    <i class="<?php echo e($category->fa_icon); ?>"></i> <?php echo e($category->name); ?>
+
+                                                </a>
+                                            </li>
+                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                    </ul>
+                                </li> -->
+
+                    
+                    <li class="<?php echo e(request()->routeIs('admin.classical_diseases.*') ? 'mm-active' : ''); ?>">
+                        <a href="javascript:void(0);"
+                            class="has-arrow <?php echo e(request()->routeIs('admin.classical_diseases.*') ? 'mm-active' : ''); ?>">
+                            <i class="fas fa-viruses"></i> <span>Classical Diseases</span>
+                        </a>
+                        <ul class="sub-menu <?php echo e(request()->routeIs('admin.classical_diseases.*') ? 'mm-show' : ''); ?>">
+                            <li><a href="<?php echo e(route('admin.classical_diseases.index')); ?>"
+                                    class="<?php echo e(request()->routeIs('admin.classical_diseases.index') ? 'active' : ''); ?>"><i
+                                        class="fas fa-list"></i> All Classical Diseases</a></li>
+                            <li><a href="<?php echo e(route('admin.classical_diseases.create')); ?>"
+                                    class="<?php echo e(request()->routeIs('admin.classical_diseases.create') ? 'active' : ''); ?>"><i
+                                        class="fas fa-plus-circle"></i> Link Fields</a></li>
                         </ul>
                     </li>
 
@@ -79,23 +95,22 @@
                                         class="fas fa-list"></i> All Modern Diseases</a></li>
                             <li><a href="<?php echo e(route('admin.modern_diseases.create')); ?>"
                                     class="<?php echo e(request()->routeIs('admin.modern_diseases.create') ? 'active' : ''); ?>"><i
-                                        class="fas fa-plus-circle"></i> Link Division & Disease</a></li>
+                                        class="fas fa-plus-circle"></i> Link Fields</a></li>
                         </ul>
                     </li>
 
-                    
-                    <li class="<?php echo e(request()->routeIs('admin.classical_diseases.*') ? 'mm-active' : ''); ?>">
+                    <li class="<?php echo e(request()->routeIs('admin.proceedures.*') ? 'mm-active' : ''); ?>">
                         <a href="javascript:void(0);"
-                            class="has-arrow <?php echo e(request()->routeIs('admin.classical_diseases.*') ? 'mm-active' : ''); ?>">
-                            <i class="fas fa-viruses"></i> <span>Classical Diseases</span>
+                            class="has-arrow <?php echo e(request()->routeIs('admin.proceedures.*') ? 'mm-active' : ''); ?>">
+                            <i class="fas fa-leaf"></i> <span>Ayurvedic Procedures</span>
                         </a>
-                        <ul class="sub-menu <?php echo e(request()->routeIs('admin.classical_diseases.*') ? 'mm-show' : ''); ?>">
-                            <li><a href="<?php echo e(route('admin.classical_diseases.index')); ?>"
-                                    class="<?php echo e(request()->routeIs('admin.classical_diseases.index') ? 'active' : ''); ?>"><i
-                                        class="fas fa-list"></i> All Classical Diseases</a></li>
-                            <li><a href="<?php echo e(route('admin.classical_diseases.create')); ?>"
-                                    class="<?php echo e(request()->routeIs('admin.classical_diseases.create') ? 'active' : ''); ?>"><i
-                                        class="fas fa-plus-circle"></i> Link Fields</a></li>
+                        <ul class="sub-menu <?php echo e(request()->routeIs('admin.proceedures.*') ? 'mm-show' : ''); ?>">
+                            <li><a href="<?php echo e(route('admin.proceedures.index')); ?>"
+                                    class="<?php echo e(request()->routeIs('admin.proceedures.index') ? 'active' : ''); ?>"><i
+                                        class="fas fa-list"></i> All Procedures</a></li>
+                            <li><a href="<?php echo e(route('admin.proceedures.create')); ?>"
+                                    class="<?php echo e(request()->routeIs('admin.proceedures.create') ? 'active' : ''); ?>"><i
+                                        class="fas fa-plus-circle"></i> Add Procedure</a></li>
                         </ul>
                     </li>
 
@@ -237,21 +252,6 @@
                             <li><a href="<?php echo e(route('admin.diseases.create')); ?>"
                                     class="<?php echo e(request()->routeIs('admin.diseases.create') ? 'active' : ''); ?>"><i
                                         class="fas fa-plus-circle"></i> Add Disease</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="<?php echo e(request()->routeIs('admin.proceedures.*') ? 'mm-active' : ''); ?>">
-                        <a href="javascript:void(0);"
-                            class="has-arrow <?php echo e(request()->routeIs('admin.proceedures.*') ? 'mm-active' : ''); ?>">
-                            <i class="fas fa-leaf"></i> <span>Proceedures</span>
-                        </a>
-                        <ul class="sub-menu <?php echo e(request()->routeIs('admin.proceedures.*') ? 'mm-show' : ''); ?>">
-                            <li><a href="<?php echo e(route('admin.proceedures.index')); ?>"
-                                    class="<?php echo e(request()->routeIs('admin.proceedures.index') ? 'active' : ''); ?>"><i
-                                        class="fas fa-list"></i> All Proceedures</a></li>
-                            <li><a href="<?php echo e(route('admin.proceedures.create')); ?>"
-                                    class="<?php echo e(request()->routeIs('admin.proceedures.create') ? 'active' : ''); ?>"><i
-                                        class="fas fa-plus-circle"></i> Add Proceedure</a></li>
                         </ul>
                     </li>
 

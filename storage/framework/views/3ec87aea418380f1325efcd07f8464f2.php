@@ -38,6 +38,10 @@
                             <td><?php echo e($proceedure->name); ?></td>
                         </tr>
                         <tr>
+                            <th>Division</th>
+                            <td><?php echo e($proceedure->division?->name ?? 'N/A'); ?></td>
+                        </tr>
+                        <tr>
                             <th>Status</th>
                             <td>
                                 <span class="badge bg-<?php echo e($proceedure->status === 'published' ? 'success' : 'secondary'); ?>">
