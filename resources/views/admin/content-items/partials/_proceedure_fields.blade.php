@@ -3,12 +3,11 @@
     <!-- Division -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Division</label>
-        <select name="division_id" class="form-select select2-ajax"
-                data-url="{{ route('admin.ajax.divisions') }}" data-placeholder="Search division...">
+        <select name="division_id" id="division_id" class="form-select select2-ajax"
+            data-url="{{ route('admin.ajax.divisions') }}" data-placeholder="Search division...">
             <option value="">Select Division</option>
             @foreach($divisions as $division)
-                <option value="{{ $division->id }}"
-                    {{ old('division_id', $selected->division_id ?? '') == $division->id ? 'selected' : '' }}>
+                <option value="{{ $division->id }}" {{ old('division_id', $selected->division_id ?? '') == $division->id ? 'selected' : '' }}>
                     {{ $division->name }}
                 </option>
             @endforeach
@@ -18,12 +17,11 @@
     <!-- Proceedure -->
     <div class="col-md-6">
         <label class="form-label fw-semibold">Procedure</label>
-        <select name="proceedure_id" class="form-select select2-ajax"
-                data-url="{{ route('admin.ajax.proceedures') }}" data-placeholder="Search proceedure...">
+        <select name="proceedure_id" class="form-select select2-ajax" data-url="{{ route('admin.ajax.proceedures') }}"
+            data-depends="#division_id" data-placeholder="Search proceedure...">
             <option value="">Select Procedure</option>
             @foreach($proceedures as $proceedure)
-                <option value="{{ $proceedure->id }}"
-                    {{ old('proceedure_id', $selected->proceedure_id ?? '') == $proceedure->id ? 'selected' : '' }}>
+                <option value="{{ $proceedure->id }}" {{ old('proceedure_id', $selected->proceedure_id ?? '') == $proceedure->id ? 'selected' : '' }}>
                     {{ $proceedure->name }}
                 </option>
             @endforeach

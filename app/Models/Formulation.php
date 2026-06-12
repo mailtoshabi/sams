@@ -7,4 +7,5 @@ class Formulation extends Model {
     public function chapters(){ return $this->belongsToMany(Chapter::class,'chapter_formulation')->withTimestamps(); }
     public function contentItems(){ return $this->hasMany(ContentItem::class); }
     public function medicines(){ return $this->hasMany(Medicine::class); }
+    public function classicalDiseases(){ return $this->hasMany(ClassicalDisease::class); }
 }

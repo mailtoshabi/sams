@@ -11,4 +11,6 @@ class Medicine extends Model {
     {
         return $this->belongsTo(MedicineType::class, 'medicine_type_id');
     }
+    public function classicalDiseases(){ return $this->hasMany(ClassicalDisease::class); }
+    public function modernDiseases(){ return $this->belongsToMany(ModernDisease::class, 'medicine_modern_disease')->withTimestamps(); }
 }

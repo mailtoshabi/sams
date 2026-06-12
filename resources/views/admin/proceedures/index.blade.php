@@ -42,6 +42,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
+                        <th>Division</th>
                         <th>Status</th>
                         <th>Titles</th>
                         <th>Updated</th>
@@ -56,6 +57,7 @@
                                 <strong>{{ $proceedure->name }}</strong><br>
                                 <small class="text-muted">{{ $proceedure->slug }}</small>
                             </td>
+                            <td>{{ $proceedure->division?->name ?? 'N/A' }}</td>
                             <td>
                                 <span class="badge bg-{{ $proceedure->status === 'published' ? 'success' : 'secondary' }}">
                                     {{ ucfirst($proceedure->status) }}
@@ -87,7 +89,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center text-muted">No proceedures found</td>
+                            <td colspan="7" class="text-center text-muted">No proceedures found</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -14,9 +14,20 @@
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
     <form method="GET" action="{{ route('admin.medicines.index') }}" class="row g-2 mb-4">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <input type="text" name="search" class="form-control" placeholder="Search by name"
                    value="{{ request('search') }}">
+        </div>
+
+        <div class="col-md-3">
+            <select name="formulation_id" class="form-select">
+                <option value="all">All Formulations</option>
+                @foreach($formulations as $formulation)
+                    <option value="{{ $formulation->id }}" {{ request('formulation_id') == $formulation->id ? 'selected' : '' }}>
+                        {{ $formulation->name }}
+                    </option>
+                @endforeach
+            </select>
         </div>
 
         <div class="col-md-3">

@@ -13,9 +13,21 @@
         <div class="alert alert-success"><?php echo e(session('success')); ?></div>
     <?php endif; ?>
     <form method="GET" action="<?php echo e(route('admin.medicines.index')); ?>" class="row g-2 mb-4">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <input type="text" name="search" class="form-control" placeholder="Search by name"
                    value="<?php echo e(request('search')); ?>">
+        </div>
+
+        <div class="col-md-3">
+            <select name="formulation_id" class="form-select">
+                <option value="all">All Formulations</option>
+                <?php $__currentLoopData = $formulations; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $formulation): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <option value="<?php echo e($formulation->id); ?>" <?php echo e(request('formulation_id') == $formulation->id ? 'selected' : ''); ?>>
+                        <?php echo e($formulation->name); ?>
+
+                    </option>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+            </select>
         </div>
 
         <div class="col-md-3">

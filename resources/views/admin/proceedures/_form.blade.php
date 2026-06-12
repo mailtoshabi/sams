@@ -3,27 +3,44 @@
 @endphp
 
 <div class="row g-3">
+    {{-- Division --}}
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Division</label>
+        <select name="division_id" id="division_id" class="form-select select2-ajax"
+            data-url="{{ route('admin.ajax.divisions') }}" data-placeholder="Search division...">
+            <option value="">Select Division</option>
+            @foreach($divisions as $division)
+                @php
+                    $selectedDivId = old('division_id', $proceedure->division_id ?? null);
+                @endphp
+                <option value="{{ $division->id }}" {{ $selectedDivId == $division->id ? 'selected' : '' }}>
+                    {{ $division->name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
 
-    {{-- Proceedure Name --}}
-    <div class="col-md-6">
-        <label class="form-label fw-semibold">Proceedure Name <span class="text-danger">*</span></label>
-        <input type="text" name="name" class="form-control"
-               value="{{ old('name', $proceedure->name ?? '') }}" required
-               placeholder="Enter proceedure name">
-    </div>
-    <div class="col-md-6">
-        <label class="form-label fw-semibold">Ayurveda Name</label>
-        <input type="text" name="ayurveda_name" class="form-control"
-            value="{{ old('ayurveda_name', $proceedure->ayurveda_name ?? '') }}"
-            placeholder="Enter Ayurveda name">
-    </div>
     {{-- Status --}}
     <div class="col-md-6">
         <label class="form-label fw-semibold">Status</label>
         <select name="status" class="form-select">
-            <option value="published" {{ old('status', $proceedure->status ?? '') === 'published' ? 'selected' : '' }}>Published</option>
-            <option value="draft" {{ old('status', $proceedure->status ?? '') === 'draft' ? 'selected' : '' }}>Draft</option>
+            <option value="published" {{ old('status', $proceedure->status ?? '') === 'published' ? 'selected' : '' }}>
+                Published</option>
+            <option value="draft" {{ old('status', $proceedure->status ?? '') === 'draft' ? 'selected' : '' }}>Draft
+            </option>
         </select>
+    </div>
+
+    {{-- Proceedure Name --}}
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Proceedure Name <span class="text-danger">*</span></label>
+        <input type="text" name="name" class="form-control" value="{{ old('name', $proceedure->name ?? '') }}" required
+            placeholder="Enter proceedure name">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label fw-semibold">Ayurveda Name</label>
+        <input type="text" name="ayurveda_name" class="form-control"
+            value="{{ old('ayurveda_name', $proceedure->ayurveda_name ?? '') }}" placeholder="Enter Ayurveda name">
     </div>
 
     {{-- Main Image --}}
@@ -32,7 +49,8 @@
         <input type="file" name="image" id="mainImageInput" class="form-control">
         <div class="mt-2" id="mainPreviewContainer">
             @if(!empty($proceedure->image_path))
-                <img id="mainPreviewImage" src="{{ asset('storage/'.$proceedure->image_path) }}" width="120" class="rounded border">
+                <img id="mainPreviewImage" src="{{ asset('storage/' . $proceedure->image_path) }}" width="120"
+                    class="rounded border">
             @else
                 <img id="mainPreviewImage" src="#" width="120" class="rounded border d-none">
             @endif
@@ -42,7 +60,8 @@
     {{-- Description --}}
     <div class="col-12">
         <label class="form-label fw-semibold">Description</label>
-        <textarea name="description" id="mainEditor" class="form-control" rows="5">{{ old('description', $proceedure->description ?? '') }}</textarea>
+        <textarea name="description" id="mainEditor" class="form-control"
+            rows="5">{{ old('description', $proceedure->description ?? '') }}</textarea>
     </div>
 
 </div>
@@ -52,60 +71,61 @@
 {{-- Titles Section --}}
 <h5 class="mb-3">Titles & Detailed Information</h5>
 @if($titles->count() > 0)
-@foreach($titles as $title)
-    @php
-        $pivot = $editMode
-            ? $proceedure->titles->firstWhere('id', $title->id)?->pivot
-            : null;
-    @endphp
+    @foreach($titles as $title)
+        @php
+            $pivot = $editMode
+                ? $proceedure->titles->firstWhere('id', $title->id)?->pivot
+                : null;
+        @endphp
 
-    <div class="card border-0 shadow-sm mb-3">
-        <div class="card-header bg-light fw-bold">
-            {{ $title->name }}
-        </div>
-        <div class="card-body">
-            <div class="row g-3 align-items-start">
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-light fw-bold">
+                {{ $title->name }}
+            </div>
+            <div class="card-body">
+                <div class="row g-3 align-items-start">
 
-                {{-- Heading --}}
-                <div class="col-md-6">
-                    <label class="form-label">Heading</label>
-                    <input type="text"
-                           name="titles[{{ $title->id }}][heading]"
-                           class="form-control"
-                           value="{{ old('titles.'.$title->id.'.heading', $pivot->heading ?? '') }}"
-                           placeholder="Enter heading for {{ $title->name }}">
-                </div>
-
-                {{-- Image --}}
-                <div class="col-md-6">
-                    <label class="form-label">Image</label>
-                    <input type="file" name="titles[{{ $title->id }}][image]" class="form-control image-input" data-preview="preview_{{ $title->id }}">
-                    <div class="mt-2">
-                        @if(!empty($pivot?->image_path))
-                            <img id="preview_{{ $title->id }}" src="{{ asset('storage/'.$pivot->image_path) }}" width="120" class="rounded border">
-                        @else
-                            <img id="preview_{{ $title->id }}" src="#" width="120" class="rounded border d-none">
-                        @endif
+                    {{-- Heading --}}
+                    <div class="col-md-6">
+                        <label class="form-label">Heading</label>
+                        <input type="text" name="titles[{{ $title->id }}][heading]" class="form-control"
+                            value="{{ old('titles.' . $title->id . '.heading', $pivot->heading ?? '') }}"
+                            placeholder="Enter heading for {{ $title->name }}">
                     </div>
-                </div>
 
-                {{-- Description --}}
-                <div class="col-12">
-                    <label class="form-label">Description</label>
-                    <textarea name="titles[{{ $title->id }}][description]" id="editor_{{ $title->id }}" class="form-control" rows="4">{{ old('titles.'.$title->id.'.description', $pivot->description ?? '') }}</textarea>
-                </div>
+                    {{-- Image --}}
+                    <div class="col-md-6">
+                        <label class="form-label">Image</label>
+                        <input type="file" name="titles[{{ $title->id }}][image]" class="form-control image-input"
+                            data-preview="preview_{{ $title->id }}">
+                        <div class="mt-2">
+                            @if(!empty($pivot?->image_path))
+                                <img id="preview_{{ $title->id }}" src="{{ asset('storage/' . $pivot->image_path) }}" width="120"
+                                    class="rounded border">
+                            @else
+                                <img id="preview_{{ $title->id }}" src="#" width="120" class="rounded border d-none">
+                            @endif
+                        </div>
+                    </div>
 
+                    {{-- Description --}}
+                    <div class="col-12">
+                        <label class="form-label">Description</label>
+                        <textarea name="titles[{{ $title->id }}][description]" id="editor_{{ $title->id }}" class="form-control"
+                            rows="4">{{ old('titles.' . $title->id . '.description', $pivot->description ?? '') }}</textarea>
+                    </div>
+
+                </div>
             </div>
         </div>
-    </div>
-@endforeach
+    @endforeach
 @else
-No Titles Found. <a href="{{ route('admin.titles.create') }}">Add a New Title</a>
+    No Titles Found. <a href="{{ route('admin.titles.create') }}">Add a New Title</a>
 @endif
 @push('scripts')
     <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // CKEditor for main and title descriptions
             if (document.querySelector('#mainEditor')) {
                 ClassicEditor.create(document.querySelector('#mainEditor')).catch(console.error);
@@ -145,6 +165,69 @@ No Titles Found. <a href="{{ route('admin.titles.create') }}">Add a New Title</a
                         reader.readAsDataURL(file);
                     }
                 });
+            });
+
+            // Select2 AJAX initialization
+            document.querySelectorAll('.select2-ajax').forEach(function (el) {
+                const url = el.dataset.url;
+                const placeholder = el.dataset.placeholder || 'Search...';
+                const dependsSelector = el.dataset.depends || null;
+
+                $(el).select2({
+                    theme: 'classic',
+                    placeholder: placeholder,
+                    allowClear: true,
+                    width: '100%',
+                    minimumInputLength: 1,
+                    ajax: {
+                        url: url,
+                        dataType: 'json',
+                        delay: 300,
+                        data: function (params) {
+                            const query = {
+                                q: params.term,
+                                page: params.page || 1
+                            };
+                            if (dependsSelector) {
+                                const dep = document.querySelector(dependsSelector);
+                                if (dep && dep.value) query.dependency = dep.value;
+                            }
+                            return query;
+                        },
+                        processResults: function (data, params) {
+                            params.page = params.page || 1;
+                            return {
+                                results: data.results,
+                                pagination: {
+                                    more: data.pagination && data.pagination.more
+                                }
+                            };
+                        },
+                        cache: true
+                    }
+                }).on('select2:open', function (e) {
+                    setTimeout(() => {
+                        const searchField = document.querySelector('.select2-search__field');
+                        if (searchField) {
+                            searchField.focus();
+                        }
+                    }, 50);
+                });
+
+                $(el).on('focus', function (e) {
+                    if (!$(this).data('select2').isOpen()) {
+                        $(this).select2('open');
+                    }
+                });
+
+                if (dependsSelector) {
+                    const parent = document.querySelector(dependsSelector);
+                    if (parent) {
+                        parent.addEventListener('change', function () {
+                            $(el).val(null).trigger('change');
+                        });
+                    }
+                }
             });
         });
     </script>

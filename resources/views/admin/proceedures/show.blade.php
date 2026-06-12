@@ -38,6 +38,10 @@
                             <td>{{ $proceedure->name }}</td>
                         </tr>
                         <tr>
+                            <th>Division</th>
+                            <td>{{ $proceedure->division?->name ?? 'N/A' }}</td>
+                        </tr>
+                        <tr>
                             <th>Status</th>
                             <td>
                                 <span class="badge bg-{{ $proceedure->status === 'published' ? 'success' : 'secondary' }}">

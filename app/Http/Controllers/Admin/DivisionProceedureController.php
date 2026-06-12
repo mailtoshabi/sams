@@ -23,15 +23,14 @@ class DivisionProceedureController extends Controller
             'proceedure_ids' => 'array|required',
         ]);
 
-        $division = Division::findOrFail($request->division_id);
-        $division->proceedures()->syncWithoutDetaching($request->proceedure_ids);
+        Proceedure::whereIn('id', $request->proceedure_ids)->update(['division_id' => $request->division_id]);
 
         return back()->with('success', 'Procedures linked to Division successfully.');
     }
 
     public function detach(Request $request, Division $division, Proceedure $proceedure)
     {
-        $division->proceedures()->detach($proceedure->id);
+        $proceedure->update(['division_id' => null]);
         return back()->with('success', 'Procedure unlinked from Division.');
     }
 }

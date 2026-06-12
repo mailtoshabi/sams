@@ -77,8 +77,15 @@ class AjaxController extends Controller {
     public function medicines(Request $request)
     {
         $q = $request->input('q');
+        $dependency = $request->input('dependency'); // formulation_id if passed
+        $requireFormulation = $request->input('require_formulation');
+
+        if ($requireFormulation && !$dependency) {
+            return response()->json(['results' => []]);
+        }
 
         $items = Medicine::query()
+            ->when($dependency, fn($qb) => $qb->where('formulation_id', $dependency))
             ->when($q, fn($qb) => $qb->where('name', 'like', "%{$q}%"))
             ->orderBy('name')
             ->limit(30)
@@ -107,8 +114,10 @@ class AjaxController extends Controller {
     public function proceedures(Request $request)
     {
         $q = $request->input('q');
+        $dependency = $request->input('dependency'); // division_id if passed
 
         $items = Proceedure::query()
+            ->when($dependency, fn($qb) => $qb->where('division_id', $dependency))
             ->when($q, fn($qb) => $qb->where('name', 'like', "%{$q}%"))
             ->orderBy('name')
             ->limit(30)

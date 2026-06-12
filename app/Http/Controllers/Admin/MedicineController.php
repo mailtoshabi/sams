@@ -31,8 +31,13 @@ class MedicineController extends Controller
             $query->where('status', $request->status);
         }
 
+        if ($request->filled('formulation_id') && $request->formulation_id !== 'all') {
+            $query->where('formulation_id', $request->formulation_id);
+        }
+
         $medicines = $query->oldest()->paginate(20)->appends($request->all());
-        return view('admin.medicines.index', compact('medicines'));
+        $formulations = Formulation::where('status', 'published')->oldest()->get();
+        return view('admin.medicines.index', compact('medicines', 'formulations'));
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Proceedure;
 use App\Models\Title;
+use App\Models\Division;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -13,7 +14,7 @@ class ProceedureController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Proceedure::with('titles');
+        $query = Proceedure::with(['titles', 'division']);
 
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
@@ -33,8 +34,8 @@ class ProceedureController extends Controller
     public function create()
     {
         $titles = Title::where('status', 'published')->where('type', 'procedure')->orderBy('order_number')->oldest()->get();
-        ;
-        return view('admin.proceedures.create', compact('titles'));
+        $divisions = Division::where('status', 'published')->oldest()->get();
+        return view('admin.proceedures.create', compact('titles', 'divisions'));
     }
 
     public function store(Request $request)
@@ -45,12 +46,15 @@ class ProceedureController extends Controller
             'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
+            'division_id' => 'nullable|exists:divisions,id',
         ]);
 
         $validated['slug'] = Str::slug($validated['name']);
         $validated['user_id'] = auth()->id() ?? 1;
 
         $proceedure = Proceedure::create($validated);
+
+
 
         if ($request->has('titles')) {
             foreach ($request->titles as $titleId => $data) {
@@ -77,9 +81,9 @@ class ProceedureController extends Controller
     public function edit(Proceedure $proceedure)
     {
         $titles = Title::where('status', 'published')->where('type', 'procedure')->orderBy('order_number')->oldest()->get();
-        ;
-        $proceedure->load('titles');
-        return view('admin.proceedures.edit', compact('proceedure', 'titles'));
+        $divisions = Division::where('status', 'published')->oldest()->get();
+        $proceedure->load(['titles', 'division']);
+        return view('admin.proceedures.edit', compact('proceedure', 'titles', 'divisions'));
     }
 
     public function update(Request $request, Proceedure $proceedure)
@@ -90,6 +94,7 @@ class ProceedureController extends Controller
             'description' => 'nullable|string',
             'status' => 'nullable|string|in:published,draft',
             'image' => 'nullable|image|max:2048',
+            'division_id' => 'nullable|exists:divisions,id',
         ]);
 
         $validated['slug'] = Str::slug($validated['name']);
@@ -102,6 +107,8 @@ class ProceedureController extends Controller
         }
 
         $proceedure->update($validated);
+
+
 
         $proceedure->titles()->detach();
 
@@ -129,7 +136,7 @@ class ProceedureController extends Controller
 
     public function show(Proceedure $proceedure)
     {
-        $proceedure->load(['titles', 'user']);
+        $proceedure->load(['titles', 'user', 'division']);
         return view('admin.proceedures.show', compact('proceedure'));
     }
 

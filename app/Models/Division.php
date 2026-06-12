@@ -10,6 +10,9 @@ class Division extends Model
 
     public function categories(){ return $this->belongsToMany(Category::class,'category_division')->withTimestamps(); }
     public function chapters(){ return $this->belongsToMany(Chapter::class,'division_chapter')->withTimestamps(); }
-    public function proceedures(){ return $this->belongsToMany(Proceedure::class,'division_proceedure')->withTimestamps(); }
+    public function proceedures(){ return $this->hasMany(Proceedure::class); }
     public function contentItems(){ return $this->hasMany(ContentItem::class); }
+    public function modernDiseases(){ return $this->hasMany(ModernDisease::class); }
+    public function diseases(){ return $this->belongsToMany(Disease::class, 'modern_diseases')->withTimestamps(); }
+    public function classicalDiseases(){ return $this->hasMany(ClassicalDisease::class); }
 }

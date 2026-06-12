@@ -71,7 +71,8 @@
     <div class="col-md-6">
         <label class="form-label fw-semibold">Medicine</label>
         <select name="medicine_id" id="medicine_id" class="form-select select2-ajax"
-            data-url="<?php echo e(route('admin.ajax.medicines')); ?>" data-placeholder="Search medicine...">
+            data-url="<?php echo e(route('admin.ajax.medicines', ['require_formulation' => 1])); ?>" data-depends="#formulation_id"
+            data-placeholder="Search medicine...">
             <option value="">Select Medicine</option>
 
             <?php if(!empty($selected->medicine_id)): ?>

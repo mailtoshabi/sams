@@ -6,4 +6,5 @@ class Chapter extends Model {
     public function divisions(){ return $this->belongsToMany(Division::class,'division_chapter')->withTimestamps(); }
     public function formulations(){ return $this->belongsToMany(Formulation::class,'chapter_formulation')->withTimestamps(); }
     public function contentItems(){ return $this->hasMany(ContentItem::class); }
+    public function classicalDiseases(){ return $this->hasMany(ClassicalDisease::class); }
 }
