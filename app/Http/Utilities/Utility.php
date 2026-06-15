@@ -42,7 +42,7 @@ class Utility
     const CATEGORY_MORDERN_DISEASE = 5;
     const CATEGORY_AYURVEDIC_PROCEEDURES = 6;
 
-    const PAGINATE_COUNT = 100;
+    const PAGINATE_COUNT = 30;
     const LOAD_MORE_COUNT = 5;
 
     const PAYMENT_ONLINE = 1;

@@ -162,7 +162,7 @@ class MedicineController extends Controller
             }
         }
 
-        return redirect()->route('admin.medicines.index')
+        return redirect()->route('admin.medicines.index', $request->query())
             ->with('success', 'Medicine updated successfully.');
     }
 

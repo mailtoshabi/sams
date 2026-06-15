@@ -86,7 +86,7 @@
                             <a href="{{ route('admin.medicines.show', $medicine->id) }}" class="btn btn-sm btn-info">
                                 <i class="bi bi-eye"></i>
                             </a>
-                            <a href="{{ route('admin.medicines.edit', $medicine->id) }}" class="btn btn-sm btn-warning">
+                            <a href="{{ route('admin.medicines.edit', array_merge(['medicine' => $medicine->id], request()->query())) }}" class="btn btn-sm btn-warning">
                                 <i class="bi bi-pencil"></i>
                             </a>
                             <form action="{{ route('admin.medicines.destroy', $medicine->id) }}" method="POST" class="d-inline">
