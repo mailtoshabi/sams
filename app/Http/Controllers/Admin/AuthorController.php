@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Utilities\Utility;
+
 use App\Http\Controllers\Controller;
 use App\Models\Author;
 use Illuminate\Http\Request;
