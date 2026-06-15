@@ -15,13 +15,13 @@ class ArticleController extends Controller
 
         if ($request->filled('search')) {
             $query->where('heading', 'like', '%' . $request->search . '%')
-                  ->orWhere('article', 'like', '%' . $request->search . '%')
-                  ->orWhereHas('author', function ($q) use ($request) {
-                      $q->where('name', 'like', '%' . $request->search . '%');
-                  });
+                ->orWhere('article', 'like', '%' . $request->search . '%')
+                ->orWhereHas('author', function ($q) use ($request) {
+                    $q->where('name', 'like', '%' . $request->search . '%');
+                });
         }
 
-        $articles = $query->with('author')->oldest()->paginate(15)->appends($request->all());
+        $articles = $query->with('author')->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
         $authors = Author::oldest()->get();
 
         return view('admin.articles.index', compact('articles', 'authors'));

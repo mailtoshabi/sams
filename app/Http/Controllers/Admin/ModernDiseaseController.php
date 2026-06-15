@@ -28,7 +28,7 @@ class ModernDiseaseController extends Controller
             });
         }
 
-        $modernDiseases = $query->oldest()->paginate(20)->appends($request->all());
+        $modernDiseases = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
         return view('admin.modern_diseases.index', compact('modernDiseases'));
     }
 
@@ -46,7 +46,7 @@ class ModernDiseaseController extends Controller
         $oldProceedures = [];
         if (old('proceedures')) {
             $oldIds = array_keys(old('proceedures'));
-            $oldProceedures = Proceedure::whereIn('id', $oldIds)->get()->map(function($proc) {
+            $oldProceedures = Proceedure::whereIn('id', $oldIds)->get()->map(function ($proc) {
                 $proc->old_description = old('proceedures.' . $proc->id . '.description');
                 return $proc;
             });

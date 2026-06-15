@@ -18,7 +18,7 @@ class CommercialOushadhaKalpanaController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        $items = $query->with('formulation')->oldest()->paginate(15)->appends($request->all());
+        $items = $query->with('formulation')->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
 
         return view('admin.commercial_oushadha_kalpanas.index', compact('items'));
     }

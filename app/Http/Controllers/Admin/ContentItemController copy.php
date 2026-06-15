@@ -27,7 +27,7 @@ class ContentItemController extends Controller
     // {
     //     $contentItems = ContentItem::with(['category', 'division', 'chapter', 'formulation', 'medicine', 'disease', 'proceedure'])
     //         ->latest()
-    //         ->paginate(20);
+    //         ->paginate(Utility::PAGINATE_COUNT);
 
     //     return view('admin.content-items.index', compact('contentItems'));
     // }
@@ -56,16 +56,16 @@ class ContentItemController extends Controller
             $search = $request->search;
             $query->where(function ($q) use ($search) {
                 $q->whereHas('medicine', fn($m) => $m->where('name', 'like', "%$search%"))
-                ->orWhereHas('disease', fn($d) => $d->where('name', 'like', "%$search%"))
-                ->orWhereHas('proceedure', fn($p) => $p->where('name', 'like', "%$search%"))
-                ->orWhereHas('category', fn($c) => $c->where('name', 'like', "%$search%"))
-                ->orWhereHas('division', fn($dv) => $dv->where('name', 'like', "%$search%"))
-                ->orWhereHas('chapter', fn($ch) => $ch->where('name', 'like', "%$search%"))
-                ->orWhereHas('formulation', fn($f) => $f->where('name', 'like', "%$search%"));
+                    ->orWhereHas('disease', fn($d) => $d->where('name', 'like', "%$search%"))
+                    ->orWhereHas('proceedure', fn($p) => $p->where('name', 'like', "%$search%"))
+                    ->orWhereHas('category', fn($c) => $c->where('name', 'like', "%$search%"))
+                    ->orWhereHas('division', fn($dv) => $dv->where('name', 'like', "%$search%"))
+                    ->orWhereHas('chapter', fn($ch) => $ch->where('name', 'like', "%$search%"))
+                    ->orWhereHas('formulation', fn($f) => $f->where('name', 'like', "%$search%"));
             });
         }
 
-        $contentItems = $query->latest()->paginate(20);
+        $contentItems = $query->latest()->paginate(Utility::PAGINATE_COUNT);
 
         return view('admin.content-items.index', compact('contentItems'));
     }
@@ -119,13 +119,13 @@ class ContentItemController extends Controller
     public function specific($id)
     {
         $default_category = Category::findOrFail(decrypt($id));
-        if($default_category->id == 1) {
+        if ($default_category->id == 1) {
             return view('admin.content-items.create', [
                 'categories' => Category::all(),
 
                 'default_category' => $default_category,
             ]);
-        }else {
+        } else {
             abort(404);
         }
     }

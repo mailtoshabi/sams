@@ -14,10 +14,10 @@ class AuthorController extends Controller
 
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('designation', 'like', '%' . $request->search . '%');
+                ->orWhere('designation', 'like', '%' . $request->search . '%');
         }
 
-        $items = $query->oldest()->paginate(15)->appends($request->all());
+        $items = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
 
         return view('admin.authors.index', compact('items'));
     }

@@ -35,7 +35,7 @@ class MedicineController extends Controller
             $query->where('formulation_id', $request->formulation_id);
         }
 
-        $medicines = $query->oldest()->paginate(20)->appends($request->all());
+        $medicines = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
         $formulations = Formulation::where('status', 'published')->oldest()->get();
         return view('admin.medicines.index', compact('medicines', 'formulations'));
     }

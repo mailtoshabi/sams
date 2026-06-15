@@ -37,7 +37,7 @@ class ClassicalDiseaseController extends Controller
             });
         }
 
-        $classicalDiseases = $query->oldest()->paginate(20)->appends($request->all());
+        $classicalDiseases = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
         return view('admin.classical_diseases.index', compact('classicalDiseases'));
     }
 

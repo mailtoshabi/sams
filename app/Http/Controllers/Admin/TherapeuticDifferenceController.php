@@ -18,15 +18,15 @@ class TherapeuticDifferenceController extends Controller
         if ($request->filled('search')) {
             $searchTerm = '%' . $request->search . '%';
             $query->where('introduction', 'like', $searchTerm)
-                  ->orWhereHas('medicine1', function ($q) use ($searchTerm) {
-                      $q->where('name', 'like', $searchTerm);
-                  })
-                  ->orWhereHas('medicine2', function ($q) use ($searchTerm) {
-                      $q->where('name', 'like', $searchTerm);
-                  });
+                ->orWhereHas('medicine1', function ($q) use ($searchTerm) {
+                    $q->where('name', 'like', $searchTerm);
+                })
+                ->orWhereHas('medicine2', function ($q) use ($searchTerm) {
+                    $q->where('name', 'like', $searchTerm);
+                });
         }
 
-        $items = $query->with(['medicine1', 'medicine2', 'points'])->oldest()->paginate(15)->appends($request->all());
+        $items = $query->with(['medicine1', 'medicine2', 'points'])->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
 
         return view('admin.therapeutic_differences.index', compact('items'));
     }

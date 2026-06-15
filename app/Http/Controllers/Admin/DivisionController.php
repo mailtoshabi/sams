@@ -11,23 +11,23 @@ use Illuminate\Support\Facades\Auth;
 class DivisionController extends Controller
 {
     public function index(Request $request)
-{
-    $query = Division::query();
+    {
+        $query = Division::query();
 
-    // 🔍 Search by name
-    if ($request->filled('search')) {
-        $query->where('name', 'like', '%' . $request->search . '%');
+        // 🔍 Search by name
+        if ($request->filled('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        // 🏷️ Filter by status
+        if ($request->filled('status') && $request->status !== 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $divisions = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
+
+        return view('admin.divisions.index', compact('divisions'));
     }
-
-    // 🏷️ Filter by status
-    if ($request->filled('status') && $request->status !== 'all') {
-        $query->where('status', $request->status);
-    }
-
-    $divisions = $query->oldest()->paginate(15)->appends($request->all());
-
-    return view('admin.divisions.index', compact('divisions'));
-}
 
     public function create()
     {

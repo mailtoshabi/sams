@@ -28,7 +28,7 @@ class TitleController extends Controller
             $query->where('type', $request->type);
         }
 
-        $titles = $query->orderBy('order_number')->oldest()->paginate(15)->appends($request->all());
+        $titles = $query->orderBy('order_number')->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
 
         return view('admin.titles.index', compact('titles'));
     }

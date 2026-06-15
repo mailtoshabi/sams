@@ -17,7 +17,7 @@ class PharmaceuticalFormController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        $items = $query->oldest()->paginate(15)->appends($request->all());
+        $items = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
 
         return view('admin.pharmaceutical_forms.index', compact('items'));
     }

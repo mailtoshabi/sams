@@ -14,12 +14,12 @@ class RawDrugIndexController extends Controller
 
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('local_name', 'like', '%' . $request->search . '%')
-                  ->orWhere('sanskrit_name', 'like', '%' . $request->search . '%')
-                  ->orWhere('botanical_name', 'like', '%' . $request->search . '%');
+                ->orWhere('local_name', 'like', '%' . $request->search . '%')
+                ->orWhere('sanskrit_name', 'like', '%' . $request->search . '%')
+                ->orWhere('botanical_name', 'like', '%' . $request->search . '%');
         }
 
-        $items = $query->oldest()->paginate(15)->appends($request->all());
+        $items = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
 
         return view('admin.raw_drug_indices.index', compact('items'));
     }

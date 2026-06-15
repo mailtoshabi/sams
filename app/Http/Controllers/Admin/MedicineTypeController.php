@@ -24,7 +24,7 @@ class MedicineTypeController extends Controller
             $query->where('status', $request->status);
         }
 
-        $medicine_types = $query->oldest()->paginate(15)->appends($request->all());
+        $medicine_types = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
 
         return view('admin.medicine_types.index', compact('medicine_types'));
     }

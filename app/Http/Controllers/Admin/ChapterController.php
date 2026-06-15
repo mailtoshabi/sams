@@ -24,7 +24,7 @@ class ChapterController extends Controller
             $query->where('status', $request->status);
         }
 
-        $chapters = $query->oldest()->paginate(15)->appends($request->all());
+        $chapters = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
 
         return view('admin.chapters.index', compact('chapters'));
     }

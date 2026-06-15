@@ -19,7 +19,7 @@ class NewPharmaceuticalFormController extends Controller
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        $items = $query->with(['pharmaceuticalForm', 'manufacturingCompanies'])->oldest()->paginate(15)->appends($request->all());
+        $items = $query->with(['pharmaceuticalForm', 'manufacturingCompanies'])->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
 
         return view('admin.new_pharmaceutical_forms.index', compact('items'));
     }

@@ -26,7 +26,7 @@ class DiseaseController extends Controller
             $query->where('status', $request->status);
         }
 
-        $diseases = $query->oldest()->paginate(20)->appends($request->all());
+        $diseases = $query->oldest()->paginate(Utility::PAGINATE_COUNT)->appends($request->all());
         return view('admin.diseases.index', compact('diseases'));
     }
 
